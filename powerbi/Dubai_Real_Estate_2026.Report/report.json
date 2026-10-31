@@ -1,0 +1,488 @@
+{
+  "config": "{\"version\": \"5.59\", \"themeCollection\": {\"customTheme\": {\"name\": \"DubaiTheme.json\", \"version\": \"5.59\", \"type\": 1}}, \"activeSectionIndex\": 0, \"linguisticSchemaSyncVersion\": 0, \"objects\": {\"outspacePane\": [{\"properties\": {\"expanded\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "filters": "[{\"name\": \"homesOnly\", \"expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Entity\": \"dim_property\"}}, \"Property\": \"segment\"}}, \"filter\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_property\", \"Type\": 0}], \"Where\": [{\"Condition\": {\"In\": {\"Expressions\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"segment\"}}], \"Values\": [[{\"Literal\": {\"Value\": \"'Apartment'\"}}], [{\"Literal\": {\"Value\": \"'Villa'\"}}]]}}}]}, \"type\": \"Categorical\", \"howCreated\": 1}]",
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "name": "RegisteredResources",
+        "type": 1,
+        "disabled": false,
+        "items": [
+          {
+            "type": 202,
+            "path": "DubaiTheme.json",
+            "name": "DubaiTheme.json"
+          }
+        ]
+      }
+    }
+  ],
+  "sections": [
+    {
+      "name": "Section1",
+      "displayName": "Market overview",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "filters": "[]",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 1000,
+          "width": 1280,
+          "height": 64,
+          "config": "{\"name\": \"v001\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 1000, \"width\": 1280, \"height\": 64}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Dubai Property Market 2026\", \"textStyle\": {\"fontSize\": \"17pt\", \"color\": \"#FFFFFF\", \"fontWeight\": \"bold\"}}]}, {\"textRuns\": [{\"value\": \"Every DLD-registered home sale (apartments + villas), January \\u2013 September 2026 \\u00b7 other types via the Filters pane\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#C9D6E8\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#12325B'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 700,
+          "y": 14,
+          "z": 2000,
+          "width": 560,
+          "height": 36,
+          "config": "{\"name\": \"v002\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 700, \"y\": 14, \"z\": 2000, \"width\": 560, \"height\": 36}}], \"singleVisual\": {\"visualType\": \"pageNavigator\", \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 76,
+          "z": 3000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v003\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 76, \"z\": 3000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_property.segment\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_property\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"segment\"}, \"Name\": \"dim_property.segment\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_property.segment\": {\"displayName\": \"Property type\"}}, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Property type'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 333,
+          "y": 76,
+          "z": 4000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v004\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 333, \"y\": 76, \"z\": 4000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_sales.registration\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_sales\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"registration\"}, \"Name\": \"fact_sales.registration\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_sales.registration\": {\"displayName\": \"Registration\"}}, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Off-plan or ready'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 646,
+          "y": 76,
+          "z": 5000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v005\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 646, \"y\": 76, \"z\": 5000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_area.area\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_area\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"area\"}, \"Name\": \"dim_area.area\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_area.area\": {\"displayName\": \"Area\"}}, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Area'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 959,
+          "y": 76,
+          "z": 6000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v006\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 959, \"y\": 76, \"z\": 6000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Source: Dubai Land Department Open Data\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#6B7280\"}}], \"horizontalTextAlignment\": \"right\"}, {\"textRuns\": [{\"value\": \"Jan \\u2013 Sep 2026 \\u00b7 Analysis by Nitheesha M V\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#6B7280\"}}], \"horizontalTextAlignment\": \"right\"}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 144,
+          "z": 7000,
+          "width": 238,
+          "height": 84,
+          "config": "{\"name\": \"v007\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 144, \"z\": 7000, \"width\": 238, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Sales\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Sales\": {\"displayName\": \"Home sales\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 270,
+          "y": 144,
+          "z": 8000,
+          "width": 238,
+          "height": 84,
+          "config": "{\"name\": \"v008\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 270, \"y\": 144, \"z\": 8000, \"width\": 238, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Sales Value (AED)\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Sales Value (AED)\"}, \"Name\": \"_Measures.Sales Value (AED)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Sales Value (AED)\": {\"displayName\": \"Sales value (AED)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 521,
+          "y": 144,
+          "z": 9000,
+          "width": 238,
+          "height": 84,
+          "config": "{\"name\": \"v009\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 521, \"y\": 144, \"z\": 9000, \"width\": 238, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Avg Price per Sq Ft\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Price per Sq Ft\"}, \"Name\": \"_Measures.Avg Price per Sq Ft\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Avg Price per Sq Ft\": {\"displayName\": \"Avg price per sq ft (AED)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 771,
+          "y": 144,
+          "z": 10000,
+          "width": 238,
+          "height": 84,
+          "config": "{\"name\": \"v010\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 771, \"y\": 144, \"z\": 10000, \"width\": 238, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Off-plan Share %\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Off-plan Share %\"}, \"Name\": \"_Measures.Off-plan Share %\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Off-plan Share %\": {\"displayName\": \"Off-plan share\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 1022,
+          "y": 144,
+          "z": 11000,
+          "width": 238,
+          "height": 84,
+          "config": "{\"name\": \"v011\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1022, \"y\": 144, \"z\": 11000, \"width\": 238, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Avg Deal (AED M)\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Avg Deal (AED M)\"}, \"Name\": \"_Measures.Avg Deal (AED M)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Avg Deal (AED M)\": {\"displayName\": \"Avg deal size (AED M)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 240,
+          "z": 12000,
+          "width": 614,
+          "height": 224,
+          "config": "{\"name\": \"v012\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 240, \"z\": 12000, \"width\": 614, \"height\": 224}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.month_name\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}, \"Name\": \"dim_date.month_name\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_date.month_name\": {\"displayName\": \"Month\"}}, \"objects\": {\"labels\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Sales per month'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 646,
+          "y": 240,
+          "z": 13000,
+          "width": 614,
+          "height": 224,
+          "config": "{\"name\": \"v013\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 646, \"y\": 240, \"z\": 13000, \"width\": 614, \"height\": 224}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.month_name\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Avg Price per Sq Ft\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}, \"Name\": \"dim_date.month_name\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Avg Price per Sq Ft\"}, \"Name\": \"_Measures.Avg Price per Sq Ft\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_date.month_name\": {\"displayName\": \"Month\"}}, \"objects\": {\"lineStyles\": [{\"properties\": {\"showMarker\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Average price per sq ft (AED) \\u2014 simple average'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 476,
+          "z": 14000,
+          "width": 614,
+          "height": 224,
+          "config": "{\"name\": \"v014\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 476, \"z\": 14000, \"width\": 614, \"height\": 224}}], \"singleVisual\": {\"visualType\": \"columnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.month_name\", \"active\": true}], \"Series\": [{\"queryRef\": \"fact_sales.registration\"}], \"Y\": [{\"queryRef\": \"_Measures.Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"fact_sales\", \"Type\": 0}, {\"Name\": \"t2\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}, \"Name\": \"dim_date.month_name\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"registration\"}, \"Name\": \"fact_sales.registration\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_date.month_name\": {\"displayName\": \"Month\"}, \"fact_sales.registration\": {\"displayName\": \"Registration\"}}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Off-plan vs ready sales per month'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 646,
+          "y": 476,
+          "z": 15000,
+          "width": 614,
+          "height": 224,
+          "config": "{\"name\": \"v015\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 646, \"y\": 476, \"z\": 15000, \"width\": 614, \"height\": 224}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_property.rooms\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_property\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"rooms\"}, \"Name\": \"dim_property.rooms\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_property.rooms\": {\"displayName\": \"Bedrooms\"}}, \"objects\": {\"labels\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'What people buy: sales by bedrooms'\"}}}}}]}}}",
+          "filters": "[]"
+        }
+      ],
+      "ordinal": 0
+    },
+    {
+      "name": "Section2",
+      "displayName": "Price index",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "filters": "[]",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 16000,
+          "width": 1280,
+          "height": 64,
+          "config": "{\"name\": \"v016\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 16000, \"width\": 1280, \"height\": 64}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Are prices really falling?\", \"textStyle\": {\"fontSize\": \"17pt\", \"color\": \"#FFFFFF\", \"fontWeight\": \"bold\"}}]}, {\"textRuns\": [{\"value\": \"Like-for-like apartment price index vs the simple average (January 2026 = 100)\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#C9D6E8\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#12325B'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 700,
+          "y": 14,
+          "z": 17000,
+          "width": 560,
+          "height": 36,
+          "config": "{\"name\": \"v017\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 700, \"y\": 14, \"z\": 17000, \"width\": 560, \"height\": 36}}], \"singleVisual\": {\"visualType\": \"pageNavigator\", \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 76,
+          "z": 18000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v018\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 76, \"z\": 18000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Like-for-like Change %\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Like-for-like Change %\"}, \"Name\": \"_Measures.Like-for-like Change %\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Like-for-like Change %\": {\"displayName\": \"Like-for-like price change, Jan \\u2192 Sep\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 437,
+          "y": 76,
+          "z": 19000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v019\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 437, \"y\": 76, \"z\": 19000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Simple Average Change %\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Simple Average Change %\"}, \"Name\": \"_Measures.Simple Average Change %\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Simple Average Change %\": {\"displayName\": \"Simple average change, Jan \\u2192 Sep\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 855,
+          "y": 76,
+          "z": 20000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v020\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 855, \"y\": 76, \"z\": 20000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Mix Effect (index points)\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Mix Effect (index points)\"}, \"Name\": \"_Measures.Mix Effect (index points)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Mix Effect (index points)\": {\"displayName\": \"Explained by area mix (index points)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 172,
+          "z": 21000,
+          "width": 1240,
+          "height": 40,
+          "config": "{\"name\": \"v021\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 172, \"z\": 21000, \"width\": 1240, \"height\": 40}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Why they differ: \", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#1F2937\", \"fontWeight\": \"bold\"}}, {\"value\": \"the simple average falls when more sales happen in cheaper areas. The like-for-like index keeps the same 47 apartment areas with fixed weights, so it only moves when prices really change.\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#6B7280\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#FFFFFF'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 224,
+          "z": 22000,
+          "width": 758,
+          "height": 476,
+          "config": "{\"name\": \"v022\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 224, \"z\": 22000, \"width\": 758, \"height\": 476}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.month_name\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Like-for-like Index\"}, {\"queryRef\": \"_Measures.Simple Average Index\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}, \"Name\": \"dim_date.month_name\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Like-for-like Index\"}, \"Name\": \"_Measures.Like-for-like Index\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Simple Average Index\"}, \"Name\": \"_Measures.Simple Average Index\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month_name\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_date.month_name\": {\"displayName\": \"Month\"}}, \"objects\": {\"lineStyles\": [{\"properties\": {\"showMarker\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Apartment price index (January 2026 = 100)'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 790,
+          "y": 224,
+          "z": 23000,
+          "width": 470,
+          "height": 476,
+          "config": "{\"name\": \"v023\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 790, \"y\": 224, \"z\": 23000, \"width\": 470, \"height\": 476}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_price_index.month\"}, {\"queryRef\": \"fact_price_index.price_index\"}, {\"queryRef\": \"fact_price_index.raw_index\"}, {\"queryRef\": \"fact_price_index.like_for_like_price_sqft\"}, {\"queryRef\": \"fact_price_index.raw_avg_price_sqft\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_price_index\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month\"}, \"Name\": \"fact_price_index.month\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"price_index\"}, \"Name\": \"fact_price_index.price_index\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"raw_index\"}, \"Name\": \"fact_price_index.raw_index\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"like_for_like_price_sqft\"}, \"Name\": \"fact_price_index.like_for_like_price_sqft\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"raw_avg_price_sqft\"}, \"Name\": \"fact_price_index.raw_avg_price_sqft\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"month\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_price_index.month\": {\"displayName\": \"Month\"}, \"fact_price_index.price_index\": {\"displayName\": \"Like-for-like index\"}, \"fact_price_index.raw_index\": {\"displayName\": \"Simple avg index\"}, \"fact_price_index.like_for_like_price_sqft\": {\"displayName\": \"Like-for-like AED/sq ft\"}, \"fact_price_index.raw_avg_price_sqft\": {\"displayName\": \"Simple avg AED/sq ft\"}}, \"objects\": {\"total\": [{\"properties\": {\"totals\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"columnWidth\": [{\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"80D\"}}}}, \"selector\": {\"metadata\": \"fact_price_index.month\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"85D\"}}}}, \"selector\": {\"metadata\": \"fact_price_index.price_index\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"85D\"}}}}, \"selector\": {\"metadata\": \"fact_price_index.raw_index\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"95D\"}}}}, \"selector\": {\"metadata\": \"fact_price_index.like_for_like_price_sqft\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"95D\"}}}}, \"selector\": {\"metadata\": \"fact_price_index.raw_avg_price_sqft\"}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Monthly index values'\"}}}}}]}}}",
+          "filters": "[]"
+        }
+      ],
+      "ordinal": 1
+    },
+    {
+      "name": "Section3",
+      "displayName": "Areas",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "filters": "[]",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 24000,
+          "width": 1280,
+          "height": 64,
+          "config": "{\"name\": \"v024\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 24000, \"width\": 1280, \"height\": 64}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Areas: where the demand is\", \"textStyle\": {\"fontSize\": \"17pt\", \"color\": \"#FFFFFF\", \"fontWeight\": \"bold\"}}]}, {\"textRuns\": [{\"value\": \"Sales, value and price level by area \\u2014 click an area to filter the value map\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#C9D6E8\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#12325B'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 700,
+          "y": 14,
+          "z": 25000,
+          "width": 560,
+          "height": 36,
+          "config": "{\"name\": \"v025\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 700, \"y\": 14, \"z\": 25000, \"width\": 560, \"height\": 36}}], \"singleVisual\": {\"visualType\": \"pageNavigator\", \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 76,
+          "z": 26000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v026\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 76, \"z\": 26000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_property.segment\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_property\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"segment\"}, \"Name\": \"dim_property.segment\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_property.segment\": {\"displayName\": \"Property type\"}}, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Property type'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 333,
+          "y": 76,
+          "z": 27000,
+          "width": 301,
+          "height": 56,
+          "config": "{\"name\": \"v027\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 333, \"y\": 76, \"z\": 27000, \"width\": 301, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_sales.registration\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_sales\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"registration\"}, \"Name\": \"fact_sales.registration\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_sales.registration\": {\"displayName\": \"Registration\"}}, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Off-plan or ready'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 646,
+          "y": 76,
+          "z": 28000,
+          "width": 614,
+          "height": 56,
+          "config": "{\"name\": \"v028\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 646, \"y\": 76, \"z\": 28000, \"width\": 614, \"height\": 56}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Source: Dubai Land Department Open Data\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#6B7280\"}}], \"horizontalTextAlignment\": \"right\"}, {\"textRuns\": [{\"value\": \"Jan \\u2013 Sep 2026 \\u00b7 Analysis by Nitheesha M V\", \"textStyle\": {\"fontSize\": \"8pt\", \"color\": \"#6B7280\"}}], \"horizontalTextAlignment\": \"right\"}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 144,
+          "z": 29000,
+          "width": 720,
+          "height": 556,
+          "config": "{\"name\": \"v029\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 144, \"z\": 29000, \"width\": 720, \"height\": 556}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_area.area\"}, {\"queryRef\": \"_Measures.Sales\"}, {\"queryRef\": \"_Measures.Value (AED bn)\"}, {\"queryRef\": \"_Measures.Avg Price per Sq Ft\"}, {\"queryRef\": \"_Measures.Off-plan Share %\"}, {\"queryRef\": \"_Measures.Area Rank by Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_area\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"area\"}, \"Name\": \"dim_area.area\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Value (AED bn)\"}, \"Name\": \"_Measures.Value (AED bn)\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Avg Price per Sq Ft\"}, \"Name\": \"_Measures.Avg Price per Sq Ft\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Off-plan Share %\"}, \"Name\": \"_Measures.Off-plan Share %\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Area Rank by Sales\"}, \"Name\": \"_Measures.Area Rank by Sales\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_area.area\": {\"displayName\": \"Area\"}, \"_Measures.Area Rank by Sales\": {\"displayName\": \"Rank\"}}, \"objects\": {\"total\": [{\"properties\": {\"totals\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"columnWidth\": [{\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"205D\"}}}}, \"selector\": {\"metadata\": \"dim_area.area\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"80D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Sales\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"95D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Value (AED bn)\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"105D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Avg Price per Sq Ft\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"95D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Off-plan Share %\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"55D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Area Rank by Sales\"}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Area leaderboard'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 752,
+          "y": 144,
+          "z": 30000,
+          "width": 508,
+          "height": 556,
+          "config": "{\"name\": \"v030\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 752, \"y\": 144, \"z\": 30000, \"width\": 508, \"height\": 556}}], \"singleVisual\": {\"visualType\": \"scatterChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_area.area\", \"active\": true}], \"X\": [{\"queryRef\": \"_Measures.Sales\"}], \"Y\": [{\"queryRef\": \"_Measures.Avg Price per Sq Ft\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_area\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"area\"}, \"Name\": \"dim_area.area\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Avg Price per Sq Ft\"}, \"Name\": \"_Measures.Avg Price per Sq Ft\"}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_area.area\": {\"displayName\": \"Area\"}}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Value map: sales (across) vs price per sq ft (up)'\"}}}}}]}}}",
+          "filters": "[]"
+        }
+      ],
+      "ordinal": 2
+    },
+    {
+      "name": "Section4",
+      "displayName": "Buyers & projects",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "filters": "[]",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 31000,
+          "width": 1280,
+          "height": 64,
+          "config": "{\"name\": \"v031\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 31000, \"width\": 1280, \"height\": 64}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Buyers and projects\", \"textStyle\": {\"fontSize\": \"17pt\", \"color\": \"#FFFFFF\", \"fontWeight\": \"bold\"}}]}, {\"textRuns\": [{\"value\": \"What sells, at what price, and which projects lead\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#C9D6E8\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#12325B'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 700,
+          "y": 14,
+          "z": 32000,
+          "width": 560,
+          "height": 36,
+          "config": "{\"name\": \"v032\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 700, \"y\": 14, \"z\": 32000, \"width\": 560, \"height\": 36}}], \"singleVisual\": {\"visualType\": \"pageNavigator\", \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 76,
+          "z": 33000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v033\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 76, \"z\": 33000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Median Price (AED M)\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Median Price (AED M)\"}, \"Name\": \"_Measures.Median Price (AED M)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Median Price (AED M)\": {\"displayName\": \"Median home price (AED M)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 437,
+          "y": 76,
+          "z": 34000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v034\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 437, \"y\": 76, \"z\": 34000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Share Under AED 2M\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Share Under AED 2M\"}, \"Name\": \"_Measures.Share Under AED 2M\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Share Under AED 2M\": {\"displayName\": \"Homes sold under AED 2M\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 855,
+          "y": 76,
+          "z": 35000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v035\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 855, \"y\": 76, \"z\": 35000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Studios & 1-Beds Share\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Studios & 1-Beds Share\"}, \"Name\": \"_Measures.Studios & 1-Beds Share\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Studios & 1-Beds Share\": {\"displayName\": \"Studios and 1-bedrooms\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 172,
+          "z": 36000,
+          "width": 614,
+          "height": 236,
+          "config": "{\"name\": \"v036\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 172, \"z\": 36000, \"width\": 614, \"height\": 236}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_sales.price_band\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_sales\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"price_band\"}, \"Name\": \"fact_sales.price_band\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"price_band\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_sales.price_band\": {\"displayName\": \"Price band\"}}, \"objects\": {\"labels\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Sales by price band (AED)'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 646,
+          "y": 172,
+          "z": 37000,
+          "width": 614,
+          "height": 236,
+          "config": "{\"name\": \"v037\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 646, \"y\": 172, \"z\": 37000, \"width\": 614, \"height\": 236}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_property.segment\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Sales\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"dim_property\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"segment\"}, \"Name\": \"dim_property.segment\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Sales\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"dim_property.segment\": {\"displayName\": \"Property type\"}}, \"objects\": {\"labels\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Sales by property type'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 420,
+          "z": 38000,
+          "width": 1240,
+          "height": 280,
+          "config": "{\"name\": \"v038\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 420, \"z\": 38000, \"width\": 1240, \"height\": 280}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_sales.project\"}, {\"queryRef\": \"dim_area.area\"}, {\"queryRef\": \"_Measures.Sales\"}, {\"queryRef\": \"_Measures.Value (AED bn)\"}, {\"queryRef\": \"_Measures.Avg Price per Sq Ft\"}, {\"queryRef\": \"_Measures.Off-plan Share %\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_sales\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"dim_area\", \"Type\": 0}, {\"Name\": \"t2\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"project\"}, \"Name\": \"fact_sales.project\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"area\"}, \"Name\": \"dim_area.area\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Sales\"}, \"Name\": \"_Measures.Sales\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Value (AED bn)\"}, \"Name\": \"_Measures.Value (AED bn)\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Avg Price per Sq Ft\"}, \"Name\": \"_Measures.Avg Price per Sq Ft\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Off-plan Share %\"}, \"Name\": \"_Measures.Off-plan Share %\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t2\"}}, \"Property\": \"Value (AED bn)\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_sales.project\": {\"displayName\": \"Project\"}, \"dim_area.area\": {\"displayName\": \"Area\"}}, \"objects\": {\"total\": [{\"properties\": {\"totals\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"columnWidth\": [{\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"330D\"}}}}, \"selector\": {\"metadata\": \"fact_sales.project\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"260D\"}}}}, \"selector\": {\"metadata\": \"dim_area.area\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"120D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Sales\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"150D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Value (AED bn)\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"170D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Avg Price per Sq Ft\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"150D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Off-plan Share %\"}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Projects by sales value'\"}}}}}]}}}",
+          "filters": "[]"
+        }
+      ],
+      "ordinal": 3
+    },
+    {
+      "name": "Section5",
+      "displayName": "Rental yield",
+      "displayOption": 1,
+      "width": 1280,
+      "height": 720,
+      "config": "{}",
+      "filters": "[]",
+      "visualContainers": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 39000,
+          "width": 1280,
+          "height": 64,
+          "config": "{\"name\": \"v039\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 0, \"y\": 0, \"z\": 39000, \"width\": 1280, \"height\": 64}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"Where do apartments pay back fastest?\", \"textStyle\": {\"fontSize\": \"17pt\", \"color\": \"#FFFFFF\", \"fontWeight\": \"bold\"}}]}, {\"textRuns\": [{\"value\": \"Gross rental yield: 34,649 new leases (Sep 2026) vs ready-apartment prices in the same buildings\", \"textStyle\": {\"fontSize\": \"9pt\", \"color\": \"#C9D6E8\"}}]}]}}]}, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"color\": {\"solid\": {\"color\": {\"expr\": {\"Literal\": {\"Value\": \"'#12325B'\"}}}}}, \"transparency\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 700,
+          "y": 14,
+          "z": 40000,
+          "width": 560,
+          "height": 36,
+          "config": "{\"name\": \"v040\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 700, \"y\": 14, \"z\": 40000, \"width\": 560, \"height\": 36}}], \"singleVisual\": {\"visualType\": \"pageNavigator\", \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"background\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"border\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"dropShadow\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 76,
+          "z": 41000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v041\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 76, \"z\": 41000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Median Gross Yield\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Median Gross Yield\"}, \"Name\": \"_Measures.Median Gross Yield\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Median Gross Yield\": {\"displayName\": \"Median gross yield (35 areas)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 437,
+          "y": 76,
+          "z": 42000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v042\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 437, \"y\": 76, \"z\": 42000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Best Gross Yield\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Best Gross Yield\"}, \"Name\": \"_Measures.Best Gross Yield\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Best Gross Yield\": {\"displayName\": \"Highest yield (Dubai Investment Park 2)\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 855,
+          "y": 76,
+          "z": 43000,
+          "width": 405,
+          "height": 84,
+          "config": "{\"name\": \"v043\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 855, \"y\": 76, \"z\": 43000, \"width\": 405, \"height\": 84}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"_Measures.Areas Measured\", \"active\": true}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"Areas Measured\"}, \"Name\": \"_Measures.Areas Measured\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"columnProperties\": {\"_Measures.Areas Measured\": {\"displayName\": \"Areas with 3+ matched buildings\"}}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 20,
+          "y": 172,
+          "z": 44000,
+          "width": 540,
+          "height": 528,
+          "config": "{\"name\": \"v044\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 172, \"z\": 44000, \"width\": 540, \"height\": 528}}], \"singleVisual\": {\"visualType\": \"clusteredBarChart\", \"projections\": {\"Category\": [{\"queryRef\": \"fact_rent_yield.area\", \"active\": true}], \"Y\": [{\"queryRef\": \"_Measures.Gross Yield %\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_rent_yield\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"area\"}, \"Name\": \"fact_rent_yield.area\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Gross Yield %\"}, \"Name\": \"_Measures.Gross Yield %\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Gross Yield %\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_rent_yield.area\": {\"displayName\": \"Area\"}}, \"objects\": {\"labels\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Gross rental yield by area'\"}}}}}]}}}",
+          "filters": "[]"
+        },
+        {
+          "x": 572,
+          "y": 172,
+          "z": 45000,
+          "width": 688,
+          "height": 528,
+          "config": "{\"name\": \"v045\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 572, \"y\": 172, \"z\": 45000, \"width\": 688, \"height\": 528}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"fact_rent_yield.area\"}, {\"queryRef\": \"_Measures.Gross Yield %\"}, {\"queryRef\": \"_Measures.Years of Rent to Buy\"}, {\"queryRef\": \"fact_rent_yield.median_price_aed_m\"}, {\"queryRef\": \"fact_rent_yield.median_annual_rent_aed_k\"}, {\"queryRef\": \"fact_rent_yield.buildings\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"fact_rent_yield\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"_Measures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"area\"}, \"Name\": \"fact_rent_yield.area\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Gross Yield %\"}, \"Name\": \"_Measures.Gross Yield %\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Years of Rent to Buy\"}, \"Name\": \"_Measures.Years of Rent to Buy\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"median_price_aed_m\"}, \"Name\": \"fact_rent_yield.median_price_aed_m\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"median_annual_rent_aed_k\"}, \"Name\": \"fact_rent_yield.median_annual_rent_aed_k\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"buildings\"}, \"Name\": \"fact_rent_yield.buildings\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"Gross Yield %\"}}}]}, \"drillFilterOtherVisuals\": true, \"columnProperties\": {\"fact_rent_yield.area\": {\"displayName\": \"Area\"}, \"_Measures.Years of Rent to Buy\": {\"displayName\": \"Years to pay back\"}, \"fact_rent_yield.median_price_aed_m\": {\"displayName\": \"Median price (AED M)\"}, \"fact_rent_yield.median_annual_rent_aed_k\": {\"displayName\": \"Median rent (AED K/yr)\"}, \"fact_rent_yield.buildings\": {\"displayName\": \"Buildings\"}}, \"objects\": {\"total\": [{\"properties\": {\"totals\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}], \"columnWidth\": [{\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"200D\"}}}}, \"selector\": {\"metadata\": \"fact_rent_yield.area\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"75D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Gross Yield %\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"85D\"}}}}, \"selector\": {\"metadata\": \"_Measures.Years of Rent to Buy\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"100D\"}}}}, \"selector\": {\"metadata\": \"fact_rent_yield.median_price_aed_m\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"110D\"}}}}, \"selector\": {\"metadata\": \"fact_rent_yield.median_annual_rent_aed_k\"}}, {\"properties\": {\"value\": {\"expr\": {\"Literal\": {\"Value\": \"75D\"}}}}, \"selector\": {\"metadata\": \"fact_rent_yield.buildings\"}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Yield table'\"}}}}}]}}}",
+          "filters": "[]"
+        }
+      ],
+      "ordinal": 4
+    }
+  ]
+}

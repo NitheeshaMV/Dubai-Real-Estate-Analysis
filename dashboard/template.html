@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dubai Property Market 2026</title>
+<meta name="description" content="Interactive analysis of every Dubai Land Department registered property sale in 2026 - prices, areas, off-plan vs ready, projects.">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --wash: rgba(42,120,214,0.08);
+  --up: #006300;
+  --down: #d03b3b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --wash: rgba(57,135,229,0.14);
+    --up: #0ca30c;
+    --down: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255,255,255,0.10);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --wash: rgba(57,135,229,0.14);
+  --up: #0ca30c;
+  --down: #e66767;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page);
+  color: var(--text-primary);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 48px; }
+header h1 { font-size: 28px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.01em; }
+header p { margin: 0; color: var(--text-secondary); max-width: 760px; }
+header .byline { margin-top: 8px; font-size: 13px; color: var(--muted); }
+header a, footer a { color: var(--series-1); }
+
+.filters {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: end;
+  margin: 24px 0 20px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-secondary); }
+.filters select {
+  font: inherit; font-size: 14px; color: var(--text-primary); background: var(--page);
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; min-width: 170px;
+}
+.filters button {
+  font: inherit; font-size: 13px; color: var(--series-1); background: none;
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px; cursor: pointer;
+}
+.filters .note { margin-left: auto; font-size: 12px; color: var(--muted); }
+
+.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.kpi .label { font-size: 12px; color: var(--text-secondary); }
+.kpi .value { font-size: 26px; font-weight: 650; margin-top: 2px; line-height: 1.2; }
+.kpi .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; min-width: 0; }
+.card.wide { grid-column: 1 / -1; }
+.card h2 { font-size: 15px; margin: 0; }
+.card .desc { font-size: 13px; color: var(--text-secondary); margin: 2px 0 12px; }
+.legend { display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin: -4px 0 8px; }
+.legend span::before {
+  content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px;
+  margin-right: 6px; vertical-align: -1px; background: var(--c);
+}
+.chart { position: relative; height: 260px; }
+.chart.tall { height: 420px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: right; padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; white-space: normal; }
+th { font-weight: 600; color: var(--text-secondary); cursor: pointer; user-select: none; position: sticky; top: 0; background: var(--surface); }
+th[aria-sort] { color: var(--text-primary); }
+td { font-variant-numeric: tabular-nums; }
+tbody tr { cursor: pointer; }
+tbody tr:hover, tbody tr.selected { background: var(--wash); }
+.table-scroll { overflow-x: auto; max-height: 460px; overflow-y: auto; }
+.up { color: var(--up); }
+.down { color: var(--down); }
+
+.insights { margin: 20px 0 0; }
+.insights ol { margin: 8px 0 0; padding-left: 20px; color: var(--text-secondary); }
+.insights li { margin-bottom: 6px; }
+.insights b { color: var(--text-primary); }
+footer { margin-top: 28px; font-size: 12px; color: var(--muted); }
+footer p { margin: 4px 0; }
+
+@media (max-width: 900px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: 1fr; }
+  .filters .note { margin-left: 0; }
+}
+@media (max-width: 520px) {
+  .wrap { padding: 20px 16px 36px; }
+  header h1 { font-size: 23px; }
+  .filters select { min-width: 0; width: 100%; }
+  .filters label { flex: 1 1 100%; }
+  .kpi .value { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Dubai Property Market 2026</h1>
+    <p>Every property sale registered with the Dubai Land Department, <span id="period"></span>. Filter by property type, off-plan or ready, and area. Click a row in the area table to drill in.</p>
+    <div class="byline">Analysis by Nitheesha M V · Data: <a href="https://dubailand.gov.ae/en/open-data/real-estate-data/" target="_blank" rel="noopener">Dubai Land Department Open Data</a></div>
+  </header>
+
+  <section class="filters" aria-label="Filters">
+    <label>Property type
+      <select id="f-seg">
+        <option value="homes">Homes (apartments + villas)</option>
+        <option value="0">Apartments</option>
+        <option value="1">Villas &amp; townhouses</option>
+        <option value="2">Commercial (offices, shops)</option>
+        <option value="3">Hotel apartments &amp; rooms</option>
+        <option value="4">Land</option>
+        <option value="all">All property types</option>
+      </select>
+    </label>
+    <label>Registration
+      <select id="f-reg">
+        <option value="all">Off-plan + ready</option>
+        <option value="1">Off-plan only</option>
+        <option value="0">Ready only</option>
+      </select>
+    </label>
+    <label>Area
+      <select id="f-area"><option value="all">All areas</option></select>
+    </label>
+    <button id="f-reset" type="button">Reset</button>
+    <span class="note">Price per sq ft = total value ÷ total size (sq ft)</span>
+  </section>
+
+  <section class="kpis" aria-label="Key figures">
+    <div class="kpi"><div class="label">Sales</div><div class="value" id="k-n"></div><div class="sub" id="k-n-sub"></div></div>
+    <div class="kpi"><div class="label">Sales value</div><div class="value" id="k-v"></div><div class="sub">AED</div></div>
+    <div class="kpi"><div class="label">Avg price per sq ft</div><div class="value" id="k-p"></div><div class="sub" id="k-p-sub"></div></div>
+    <div class="kpi"><div class="label">Off-plan share</div><div class="value" id="k-o"></div><div class="sub">of sales</div></div>
+    <div class="kpi"><div class="label">Avg deal size</div><div class="value" id="k-d"></div><div class="sub">AED per sale</div></div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Sales per month</h2>
+      <p class="desc">Number of registered sales. <span class="partial-note"></span></p>
+      <div class="chart"><canvas id="c-volume" role="img" aria-label="Bar chart of sales per month"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Average price per sq ft (AED)</h2>
+      <p class="desc">Simple average for the current filter — it also moves when the mix of areas changes (see the like-for-like index below).</p>
+      <div class="chart"><canvas id="c-price" role="img" aria-label="Line chart of average price per square foot by month"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2>Are prices really changing? Like-for-like apartment price index</h2>
+      <p class="desc">First month = 100. The simple average moves when more sales happen in cheaper or pricier areas; the like-for-like index keeps the same <span id="basket-n"></span> areas with fixed weights, so it shows the true price change. Apartments, all areas — not affected by the filters.</p>
+      <div class="legend"><span style="--c:var(--series-1)">Like-for-like index</span><span style="--c:var(--series-2)">Simple average</span></div>
+      <div class="chart"><canvas id="c-index" role="img" aria-label="Line chart comparing a like-for-like apartment price index with the simple average price"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Off-plan vs ready</h2>
+      <p class="desc">Sales per month by registration type.</p>
+      <div class="legend"><span style="--c:var(--series-1)">Off-plan</span><span style="--c:var(--series-2)">Ready</span></div>
+      <div class="chart"><canvas id="c-offplan" role="img" aria-label="Stacked bar chart of off-plan and ready sales per month"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>What people buy</h2>
+      <p class="desc">Sales by bedroom count.</p>
+      <div class="chart"><canvas id="c-rooms" role="img" aria-label="Bar chart of sales by bedroom count"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2>Top 15 areas by sales</h2>
+      <p class="desc">Hover for price level. The selected area is highlighted.</p>
+      <div class="chart tall"><canvas id="c-areas" role="img" aria-label="Bar chart of the 15 areas with the most sales"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2>Area leaderboard</h2>
+      <p class="desc">Price change compares the first 3 months with the latest 3 months (shown when each window has at least 20 sales). Click a column to sort, a row to filter.</p>
+      <div class="table-scroll"><table id="t-areas"></table></div>
+    </div>
+    <div class="card wide" id="yield-card" hidden>
+      <h2>Where do apartments pay back fastest? Gross rental yield by area</h2>
+      <p class="desc">Median annual rent per sq ft of new leases (<span id="yield-period"></span>) ÷ median sale price per sq ft of ready apartments, using only buildings that appear in both — so rent and price come from the same towers. Areas with 3+ buildings, 50+ ready sales and 50+ leases. Gross — before service charges, vacancy and fees. Not affected by the filters.</p>
+      <div class="chart tall"><canvas id="c-yield" role="img" aria-label="Bar chart of the 15 areas with the highest gross rental yield"></canvas></div>
+      <div class="table-scroll" style="margin-top:12px"><table id="t-yield"></table></div>
+    </div>
+    <div class="card wide">
+      <h2>Top 10 projects by sales value</h2>
+      <p class="desc">For the current filter. Projects need 10+ sales (single bulk deals are excluded).</p>
+      <div class="table-scroll"><table id="t-projects"></table></div>
+    </div>
+  </section>
+
+  <section class="card insights" id="insights" hidden>
+    <h2>Key findings</h2>
+    <ol id="insight-list"></ol>
+  </section>
+
+  <footer>
+    <p>Source: Dubai Land Department open data (Transactions → Sales), exported from dubailand.gov.ae. One row per DLD transaction number; duplicate rows (one per nearby metro station) removed; homes priced outside 100–20,000 AED per sq ft dropped as data-entry errors.</p>
+    <p>Built with Python, DuckDB (SQL) and Chart.js. Not investment advice.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const DATA = /*__DATA__*/null;
+const INSIGHTS = /*__INSIGHTS__*/[];
+const HOMES = [0, 1];
+const [M, A, S, O, R, N, V, SQ] = [0, 1, 2, 3, 4, 5, 6, 7];
+const $ = (id) => document.getElementById(id);
+const state = { seg: "homes", reg: "all", area: "all", sortKey: "n", sortDir: -1 };
+
+const fmtInt = (x) => Math.round(x).toLocaleString("en-US");
+const fmtAED = (x) => x >= 1e9 ? (x / 1e9).toFixed(1) + " bn" : x >= 1e6 ? (x / 1e6).toFixed(1) + " M" : fmtInt(x);
+const fmtPct = (x) => (x * 100).toFixed(0) + "%";
+const monthLabel = (ym) => new Date(ym + "-01T00:00:00").toLocaleString("en-US", { month: "short" });
+const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+function segOk(s) {
+  if (state.seg === "all") return true;
+  if (state.seg === "homes") return HOMES.includes(s);
+  return s === Number(state.seg);
+}
+function filtered(ignoreArea = false) {
+  return DATA.cube.filter((r) =>
+    segOk(r[S]) &&
+    (state.reg === "all" || r[O] === Number(state.reg)) &&
+    (ignoreArea || state.area === "all" || r[A] === Number(state.area)));
+}
+function sumBy(rows, keyIdx, size) {
+  const out = Array.from({ length: size }, () => ({ n: 0, v: 0, sq: 0, off: 0 }));
+  for (const r of rows) {
+    const o = out[r[keyIdx]];
+    o.n += r[N]; o.v += r[V]; o.sq += r[SQ]; o.off += r[O] ? r[N] : 0;
+  }
+  return out;
+}
+
+// ---- charts -------------------------------------------------------------
+Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.animation.duration = 250;
+const charts = {};
+
+function baseOptions(extra = {}) {
+  const muted = css("--muted"), grid = css("--grid"), axis = css("--axis");
+  return {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: css("--surface"), titleColor: css("--text-primary"),
+        bodyColor: css("--text-secondary"), borderColor: css("--border"), borderWidth: 1,
+        padding: 10, cornerRadius: 8, boxPadding: 4, usePointStyle: true,
+      },
+    },
+    scales: {
+      x: { grid: { display: false }, border: { color: axis }, ticks: { color: muted } },
+      y: { grid: { color: grid }, border: { display: false }, ticks: { color: muted }, beginAtZero: true },
+    },
+    ...extra,
+  };
+}
+
+function upsert(id, config) {
+  if (charts[id]) { charts[id].destroy(); }
+  charts[id] = new Chart($(id), config);
+}
+
+function render() {
+  const rows = filtered();
+  const months = DATA.months;
+  const byMonth = sumBy(rows, M, months.length);
+  const total = byMonth.reduce((a, m) => ({ n: a.n + m.n, v: a.v + m.v, sq: a.sq + m.sq, off: a.off + m.off }), { n: 0, v: 0, sq: 0, off: 0 });
+
+  // KPIs
+  $("k-n").textContent = fmtInt(total.n);
+  $("k-n-sub").textContent = months.length + " months";
+  $("k-v").textContent = fmtAED(total.v);
+  $("k-p").textContent = total.sq ? fmtInt(total.v / total.sq) : "–";
+  $("k-p-sub").textContent = "AED, total value ÷ total size";
+  $("k-o").textContent = total.n ? fmtPct(total.off / total.n) : "–";
+  $("k-d").textContent = total.n ? fmtAED(total.v / total.n) : "–";
+
+  const labels = months.map(monthLabel);
+  const s1 = css("--series-1"), s2 = css("--series-2"), surface = css("--surface");
+
+  upsert("c-volume", {
+    type: "bar",
+    data: { labels, datasets: [{ label: "Sales", data: byMonth.map((m) => m.n), backgroundColor: s1, borderRadius: { topLeft: 4, topRight: 4 }, maxBarThickness: 36 }] },
+    options: baseOptions({ plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => ` ${fmtInt(c.raw)} sales · AED ${fmtAED(byMonth[c.dataIndex].v)}` } } } }),
+  });
+
+  upsert("c-price", {
+    type: "line",
+    data: { labels, datasets: [{ label: "Avg price per sq ft", data: byMonth.map((m) => (m.n >= 10 ? Math.round(m.v / m.sq) : null)), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 4, pointHoverRadius: 6, pointBorderColor: surface, pointBorderWidth: 2, tension: 0.25, spanGaps: true }] },
+    options: baseOptions({
+      scales: { ...baseOptions().scales, y: { ...baseOptions().scales.y, beginAtZero: false, ticks: { color: css("--muted"), callback: (v) => fmtInt(v) } } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => ` AED ${fmtInt(c.raw)} per sq ft (${fmtInt(byMonth[c.dataIndex].n)} sales)` } } },
+    }),
+  });
+
+  upsert("c-offplan", {
+    type: "bar",
+    data: { labels, datasets: [
+      { label: "Off-plan", data: byMonth.map((m) => m.off), backgroundColor: s1, borderColor: surface, borderWidth: { top: 2 }, borderSkipped: false, maxBarThickness: 36 },
+      { label: "Ready", data: byMonth.map((m) => m.n - m.off), backgroundColor: s2, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: "bottom", maxBarThickness: 36 },
+    ] },
+    options: baseOptions({
+      scales: { x: { ...baseOptions().scales.x, stacked: true }, y: { ...baseOptions().scales.y, stacked: true } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: {
+        label: (c) => { const m = byMonth[c.dataIndex]; return ` ${c.dataset.label}: ${fmtInt(c.raw)} (${m.n ? fmtPct(c.raw / m.n) : "–"})`; } } } },
+    }),
+  });
+
+  const pi = DATA.priceIndex;
+  const endLabel = { id: "endLabel", afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+    chart.data.datasets.forEach((ds, i) => {
+      const meta = chart.getDatasetMeta(i), pt = meta.data[meta.data.length - 1];
+      if (!pt) return;
+      ctx.save(); ctx.font = "12px system-ui, sans-serif"; ctx.fillStyle = css("--text-primary");
+      ctx.textBaseline = "middle"; ctx.fillText(ds.data[ds.data.length - 1].toFixed(1), pt.x + 8, pt.y); ctx.restore();
+    });
+  } };
+  $("basket-n").textContent = pi.length ? pi[0][3] : "";
+  upsert("c-index", {
+    type: "line",
+    data: { labels: pi.map((r) => monthLabel(r[0])), datasets: [
+      { label: "Like-for-like index", data: pi.map((r) => r[1]), borderColor: s1, backgroundColor: s1, borderWidth: 2, pointRadius: 4, pointBorderColor: surface, pointBorderWidth: 2, tension: 0.25 },
+      { label: "Simple average", data: pi.map((r) => r[2]), borderColor: s2, backgroundColor: s2, borderWidth: 2, pointRadius: 4, pointBorderColor: surface, pointBorderWidth: 2, tension: 0.25 },
+    ] },
+    plugins: [endLabel],
+    options: baseOptions({
+      layout: { padding: { right: 40 } },
+      scales: { ...baseOptions().scales, y: { ...baseOptions().scales.y, beginAtZero: false } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => ` ${c.dataset.label}: ${c.raw.toFixed(1)}` } } },
+    }),
+  });
+
+  const byRoom = sumBy(rows, R, DATA.rooms.length)
+    .map((x, i) => ({ ...x, label: DATA.rooms[i] }))
+    .filter((x) => x.n > 0 && x.label !== "Unknown")
+    .sort((a, b) => b.n - a.n).slice(0, 8);
+  upsert("c-rooms", {
+    type: "bar",
+    data: { labels: byRoom.map((x) => x.label), datasets: [{ label: "Sales", data: byRoom.map((x) => x.n), backgroundColor: s1, borderRadius: { topRight: 4, bottomRight: 4 }, borderSkipped: "left", maxBarThickness: 22 }] },
+    options: baseOptions({
+      indexAxis: "y", interaction: { mode: "nearest", axis: "y", intersect: false },
+      scales: { x: { grid: { color: css("--grid") }, border: { display: false }, ticks: { color: css("--muted") }, beginAtZero: true }, y: { grid: { display: false }, border: { color: css("--axis") }, ticks: { color: css("--text-secondary") } } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => { const x = byRoom[c.dataIndex]; return ` ${fmtInt(x.n)} sales · avg AED ${fmtAED(x.v / x.n)}`; } } } },
+    }),
+  });
+
+  renderAreas();
+  renderProjects();
+  renderYield();
+}
+
+function renderYield() {
+  const ry = DATA.rentalYield || [];
+  if (!ry.length) return;
+  $("yield-card").hidden = false;
+  $("yield-period").textContent = DATA.rentPeriod || "";
+  const top = ry.slice(0, 15);
+  upsert("c-yield", {
+    type: "bar",
+    data: { labels: top.map((r) => r[0]), datasets: [{ label: "Gross yield", data: top.map((r) => r[5]),
+      backgroundColor: css("--series-1"), borderRadius: { topRight: 4, bottomRight: 4 }, borderSkipped: "left", maxBarThickness: 18 }] },
+    plugins: [{ id: "barLabels", afterDatasetsDraw(chart) {
+      const { ctx } = chart; const meta = chart.getDatasetMeta(0);
+      ctx.save(); ctx.font = "12px system-ui, sans-serif"; ctx.fillStyle = css("--text-secondary"); ctx.textBaseline = "middle";
+      meta.data.forEach((bar, i) => ctx.fillText(top[i][5].toFixed(1) + "%", bar.x + 6, bar.y)); ctx.restore();
+    } }],
+    options: baseOptions({
+      indexAxis: "y", interaction: { mode: "nearest", axis: "y", intersect: false }, layout: { padding: { right: 40 } },
+      scales: { x: { grid: { color: css("--grid") }, border: { display: false }, ticks: { color: css("--muted"), callback: (v) => v + "%" }, beginAtZero: true },
+                y: { grid: { display: false }, border: { color: css("--axis") }, ticks: { color: css("--text-secondary"), autoSkip: false } } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => { const r = top[c.dataIndex];
+        return [` ${r[5].toFixed(1)}% gross yield (${r[6].toFixed(1)} years of rent to buy)`, ` Median price AED ${fmtAED(r[3])} · median rent AED ${fmtInt(r[4])}/yr`]; } } } },
+    }),
+  });
+  $("t-yield").innerHTML = "<thead><tr><th>Area</th><th>Gross yield</th><th>Years to pay back</th><th>Median price (AED)</th><th>Median rent (AED/yr)</th><th>Buildings</th><th>Ready sales</th><th>New leases</th></tr></thead><tbody>" +
+    ry.map((r) => `<tr><td>${r[0]}</td><td>${r[5].toFixed(1)}%</td><td>${r[6].toFixed(1)}</td><td>${fmtAED(r[3])}</td><td>${fmtInt(r[4])}</td><td>${fmtInt(r[7])}</td><td>${fmtInt(r[1])}</td><td>${fmtInt(r[2])}</td></tr>`).join("") + "</tbody>";
+}
+
+function areaStats() {
+  const rows = filtered(true);
+  const nM = DATA.months.length;
+  const early = new Set([0, 1, 2]), late = new Set([nM - 3, nM - 2, nM - 1]);
+  const acc = new Map();
+  for (const r of rows) {
+    let a = acc.get(r[A]);
+    if (!a) { a = { id: r[A], n: 0, v: 0, sq: 0, off: 0, en: 0, ev: 0, esq: 0, ln: 0, lv: 0, lsq: 0 }; acc.set(r[A], a); }
+    a.n += r[N]; a.v += r[V]; a.sq += r[SQ]; if (r[O]) a.off += r[N];
+    if (early.has(r[M])) { a.en += r[N]; a.ev += r[V]; a.esq += r[SQ]; }
+    if (late.has(r[M])) { a.ln += r[N]; a.lv += r[V]; a.lsq += r[SQ]; }
+  }
+  return [...acc.values()].map((a) => ({
+    ...a, name: DATA.areas[a.id], p: a.sq ? a.v / a.sq : 0, offShare: a.n ? a.off / a.n : 0,
+    change: nM >= 6 && a.en >= 20 && a.ln >= 20 ? (a.lv / a.lsq) / (a.ev / a.esq) - 1 : null,
+  }));
+}
+
+function renderAreas() {
+  const stats = areaStats();
+  const top = [...stats].sort((a, b) => b.n - a.n).slice(0, 15);
+  const s1 = css("--series-1"), wash = css("--axis");
+  const sel = state.area === "all" ? null : Number(state.area);
+  upsert("c-areas", {
+    type: "bar",
+    data: { labels: top.map((a) => a.name), datasets: [{ label: "Sales", data: top.map((a) => a.n),
+      backgroundColor: top.map((a) => (sel === null || a.id === sel ? s1 : wash)),
+      borderRadius: { topRight: 4, bottomRight: 4 }, borderSkipped: "left", maxBarThickness: 18 }] },
+    options: baseOptions({
+      indexAxis: "y", interaction: { mode: "nearest", axis: "y", intersect: false },
+      onClick: (_, els) => { if (els.length) setArea(top[els[0].index].id); },
+      scales: { x: { grid: { color: css("--grid") }, border: { display: false }, ticks: { color: css("--muted") }, beginAtZero: true }, y: { grid: { display: false }, border: { color: css("--axis") }, ticks: { color: css("--text-secondary"), autoSkip: false } } },
+      plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => { const a = top[c.dataIndex]; return [` ${fmtInt(a.n)} sales · AED ${fmtAED(a.v)}`, ` AED ${fmtInt(a.p)} per sq ft · ${fmtPct(a.offShare)} off-plan`]; } } } },
+    }),
+  });
+
+  const cols = [
+    ["name", "Area"], ["n", "Sales"], ["v", "Value (AED)"], ["p", "AED / sq ft"], ["offShare", "Off-plan"], ["change", "Price change"],
+  ];
+  const sorted = stats.filter((a) => a.n >= 30).sort((a, b) => {
+    const x = a[state.sortKey], y = b[state.sortKey];
+    if (x === null) return 1; if (y === null) return -1;
+    return (typeof x === "string" ? x.localeCompare(y) : x - y) * state.sortDir;
+  });
+  const t = $("t-areas");
+  t.innerHTML = "<thead><tr>" + cols.map(([k, l]) =>
+    `<th data-k="${k}"${state.sortKey === k ? ` aria-sort="${state.sortDir > 0 ? "ascending" : "descending"}"` : ""}>${l}${state.sortKey === k ? (state.sortDir > 0 ? " ▲" : " ▼") : ""}</th>`).join("") + "</tr></thead><tbody>" +
+    sorted.map((a) => `<tr data-id="${a.id}"${a.id === sel ? ' class="selected"' : ""}><td>${a.name}</td><td>${fmtInt(a.n)}</td><td>${fmtAED(a.v)}</td><td>${fmtInt(a.p)}</td><td>${fmtPct(a.offShare)}</td><td>${a.change === null ? "–" : `<span class="${a.change >= 0 ? "up" : "down"}">${a.change >= 0 ? "▲" : "▼"} ${Math.abs(a.change * 100).toFixed(1)}%</span>`}</td></tr>`).join("") + "</tbody>";
+  t.querySelectorAll("th").forEach((th) => th.onclick = () => {
+    const k = th.dataset.k;
+    state.sortDir = state.sortKey === k ? -state.sortDir : (k === "name" ? 1 : -1);
+    state.sortKey = k; renderAreas();
+  });
+  t.querySelectorAll("tbody tr").forEach((tr) => tr.onclick = () => setArea(Number(tr.dataset.id)));
+}
+
+function renderProjects() {
+  const acc = new Map();
+  for (const p of DATA.projects) {
+    const [name, a, s, o, n, v, sq] = p;
+    if (!segOk(s) || (state.reg !== "all" && o !== Number(state.reg)) || (state.area !== "all" && a !== Number(state.area))) continue;
+    const key = name + "|" + a;
+    const x = acc.get(key) || { name, area: DATA.areas[a], n: 0, v: 0, sq: 0, off: 0 };
+    x.n += n; x.v += v; x.sq += sq; if (o) x.off += n; acc.set(key, x);
+  }
+  const top = [...acc.values()].sort((a, b) => b.v - a.v).slice(0, 10);
+  $("t-projects").innerHTML = "<thead><tr><th>Project</th><th>Area</th><th>Sales</th><th>Value (AED)</th><th>AED / sq ft</th><th>Off-plan</th></tr></thead><tbody>" +
+    (top.length ? top.map((x) => `<tr><td>${x.name}</td><td>${x.area}</td><td>${fmtInt(x.n)}</td><td>${fmtAED(x.v)}</td><td>${fmtInt(x.v / x.sq)}</td><td>${fmtPct(x.off / x.n)}</td></tr>`).join("")
+      : '<tr><td colspan="6">No projects with 10+ sales for this filter.</td></tr>') + "</tbody>";
+}
+
+function setArea(id) {
+  state.area = state.area === String(id) ? "all" : String(id);
+  $("f-area").value = state.area;
+  render();
+}
+
+// ---- init ---------------------------------------------------------------
+$("period").textContent = DATA.period;
+const lastMonth = DATA.months[DATA.months.length - 1];
+$("f-area").insertAdjacentHTML("beforeend", DATA.areas.map((a, i) => `<option value="${i}">${a}</option>`).join(""));
+if (!DATA.lastMonthComplete) document.querySelectorAll(".partial-note").forEach((el) => el.textContent = `${monthLabel(lastMonth)} is partial (to ${DATA.period.split("–")[1].trim()}).`);
+$("f-seg").onchange = (e) => { state.seg = e.target.value; render(); };
+$("f-reg").onchange = (e) => { state.reg = e.target.value; render(); };
+$("f-area").onchange = (e) => { state.area = e.target.value; render(); };
+$("f-reset").onclick = () => { Object.assign(state, { seg: "homes", reg: "all", area: "all" }); $("f-seg").value = "homes"; $("f-reg").value = "all"; $("f-area").value = "all"; render(); };
+if (INSIGHTS.length) { $("insights").hidden = false; $("insight-list").innerHTML = INSIGHTS.map((s) => `<li>${s}</li>`).join(""); }
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+render();
+</script>
+</body>
+</html>

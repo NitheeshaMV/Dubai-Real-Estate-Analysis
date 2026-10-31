@@ -1,0 +1,793 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "tables": [
+      {
+        "name": "fact_sales",
+        "columns": [
+          {
+            "name": "transaction_id",
+            "dataType": "string",
+            "sourceColumn": "transaction_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date",
+            "summarizeBy": "none",
+            "formatString": "dd mmm yyyy"
+          },
+          {
+            "name": "area_key",
+            "dataType": "int64",
+            "sourceColumn": "area_key",
+            "summarizeBy": "none",
+            "formatString": "0",
+            "isHidden": true
+          },
+          {
+            "name": "property_key",
+            "dataType": "int64",
+            "sourceColumn": "property_key",
+            "summarizeBy": "none",
+            "formatString": "0",
+            "isHidden": true
+          },
+          {
+            "name": "project",
+            "dataType": "string",
+            "sourceColumn": "project",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "procedure",
+            "dataType": "string",
+            "sourceColumn": "procedure",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "is_offplan",
+            "dataType": "boolean",
+            "sourceColumn": "is_offplan",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "registration",
+            "dataType": "string",
+            "sourceColumn": "registration",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "is_freehold",
+            "dataType": "boolean",
+            "sourceColumn": "is_freehold",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "price_aed",
+            "dataType": "double",
+            "sourceColumn": "price_aed",
+            "summarizeBy": "sum",
+            "formatString": "#,0"
+          },
+          {
+            "name": "size_sqft",
+            "dataType": "double",
+            "sourceColumn": "size_sqft",
+            "summarizeBy": "sum",
+            "formatString": "#,0"
+          },
+          {
+            "name": "price_per_sqft",
+            "dataType": "double",
+            "sourceColumn": "price_per_sqft",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "price_band",
+            "dataType": "string",
+            "sourceColumn": "price_band",
+            "summarizeBy": "none",
+            "sortByColumn": "price_band_order"
+          },
+          {
+            "name": "price_band_order",
+            "dataType": "int64",
+            "sourceColumn": "price_band_order",
+            "summarizeBy": "none",
+            "formatString": "0",
+            "isHidden": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_sales",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"fact_sales.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"transaction_id\", type text}, {\"date\", type date}, {\"area_key\", Int64.Type}, {\"property_key\", Int64.Type}, {\"project\", type text}, {\"procedure\", type text}, {\"is_offplan\", type logical}, {\"registration\", type text}, {\"is_freehold\", type logical}, {\"price_aed\", type number}, {\"size_sqft\", type number}, {\"price_per_sqft\", type number}, {\"price_band\", type text}, {\"price_band_order\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_date",
+        "columns": [
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date",
+            "summarizeBy": "none",
+            "formatString": "dd mmm yyyy",
+            "isKey": true
+          },
+          {
+            "name": "year",
+            "dataType": "int64",
+            "sourceColumn": "year",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "quarter",
+            "dataType": "int64",
+            "sourceColumn": "quarter",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "month_number",
+            "dataType": "int64",
+            "sourceColumn": "month_number",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "month_name",
+            "dataType": "string",
+            "sourceColumn": "month_name",
+            "summarizeBy": "none",
+            "sortByColumn": "month_number"
+          },
+          {
+            "name": "year_month",
+            "dataType": "string",
+            "sourceColumn": "year_month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "week",
+            "dataType": "int64",
+            "sourceColumn": "week",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "weekday",
+            "dataType": "string",
+            "sourceColumn": "weekday",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_date",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_date.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"date\", type date}, {\"year\", Int64.Type}, {\"quarter\", Int64.Type}, {\"month_number\", Int64.Type}, {\"month_name\", type text}, {\"year_month\", type text}, {\"week\", Int64.Type}, {\"weekday\", type text}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "dataCategory": "Time"
+      },
+      {
+        "name": "dim_area",
+        "columns": [
+          {
+            "name": "area_key",
+            "dataType": "int64",
+            "sourceColumn": "area_key",
+            "summarizeBy": "none",
+            "formatString": "0",
+            "isHidden": true
+          },
+          {
+            "name": "area",
+            "dataType": "string",
+            "sourceColumn": "area",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "nearest_metro",
+            "dataType": "string",
+            "sourceColumn": "nearest_metro",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "nearest_mall",
+            "dataType": "string",
+            "sourceColumn": "nearest_mall",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "nearest_landmark",
+            "dataType": "string",
+            "sourceColumn": "nearest_landmark",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_area",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_area.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"area_key\", Int64.Type}, {\"area\", type text}, {\"nearest_metro\", type text}, {\"nearest_mall\", type text}, {\"nearest_landmark\", type text}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_property",
+        "columns": [
+          {
+            "name": "property_key",
+            "dataType": "int64",
+            "sourceColumn": "property_key",
+            "summarizeBy": "none",
+            "formatString": "0",
+            "isHidden": true
+          },
+          {
+            "name": "segment",
+            "dataType": "string",
+            "sourceColumn": "segment",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "property_type",
+            "dataType": "string",
+            "sourceColumn": "property_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "property_sub_type",
+            "dataType": "string",
+            "sourceColumn": "property_sub_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "rooms",
+            "dataType": "string",
+            "sourceColumn": "rooms",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "dim_property",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_property.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"property_key\", Int64.Type}, {\"segment\", type text}, {\"property_type\", type text}, {\"property_sub_type\", type text}, {\"rooms\", type text}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_rent_yield",
+        "columns": [
+          {
+            "name": "area",
+            "dataType": "string",
+            "sourceColumn": "area",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "buildings",
+            "dataType": "int64",
+            "sourceColumn": "buildings",
+            "summarizeBy": "sum",
+            "formatString": "#,0"
+          },
+          {
+            "name": "ready_sales",
+            "dataType": "int64",
+            "sourceColumn": "ready_sales",
+            "summarizeBy": "sum",
+            "formatString": "#,0"
+          },
+          {
+            "name": "leases",
+            "dataType": "int64",
+            "sourceColumn": "leases",
+            "summarizeBy": "sum",
+            "formatString": "#,0"
+          },
+          {
+            "name": "median_price_aed",
+            "dataType": "double",
+            "sourceColumn": "median_price_aed",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "median_annual_rent_aed",
+            "dataType": "double",
+            "sourceColumn": "median_annual_rent_aed",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "median_price_sqft",
+            "dataType": "double",
+            "sourceColumn": "median_price_sqft",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "median_rent_sqft",
+            "dataType": "double",
+            "sourceColumn": "median_rent_sqft",
+            "summarizeBy": "none",
+            "formatString": "#,0.0"
+          },
+          {
+            "name": "gross_yield_pct",
+            "dataType": "double",
+            "sourceColumn": "gross_yield_pct",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "years_of_rent_to_buy",
+            "dataType": "double",
+            "sourceColumn": "years_of_rent_to_buy",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          },
+          {
+            "name": "yield_rank",
+            "dataType": "int64",
+            "sourceColumn": "yield_rank",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "median_price_aed_m",
+            "dataType": "double",
+            "sourceColumn": "median_price_aed_m",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "median_annual_rent_aed_k",
+            "dataType": "double",
+            "sourceColumn": "median_annual_rent_aed_k",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_rent_yield",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"fact_rent_yield.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"area\", type text}, {\"buildings\", Int64.Type}, {\"ready_sales\", Int64.Type}, {\"leases\", Int64.Type}, {\"median_price_aed\", type number}, {\"median_annual_rent_aed\", type number}, {\"median_price_sqft\", type number}, {\"median_rent_sqft\", type number}, {\"gross_yield_pct\", type number}, {\"years_of_rent_to_buy\", type number}, {\"yield_rank\", Int64.Type}, {\"median_price_aed_m\", type number}, {\"median_annual_rent_aed_k\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_price_index",
+        "columns": [
+          {
+            "name": "month",
+            "dataType": "dateTime",
+            "sourceColumn": "month",
+            "summarizeBy": "none",
+            "formatString": "mmm yyyy"
+          },
+          {
+            "name": "basket_areas",
+            "dataType": "int64",
+            "sourceColumn": "basket_areas",
+            "summarizeBy": "none",
+            "formatString": "0"
+          },
+          {
+            "name": "like_for_like_price_sqft",
+            "dataType": "double",
+            "sourceColumn": "like_for_like_price_sqft",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "price_index",
+            "dataType": "double",
+            "sourceColumn": "price_index",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          },
+          {
+            "name": "raw_avg_price_sqft",
+            "dataType": "double",
+            "sourceColumn": "raw_avg_price_sqft",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "raw_index",
+            "dataType": "double",
+            "sourceColumn": "raw_index",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_price_index",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"fact_price_index.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"month\", type date}, {\"basket_areas\", Int64.Type}, {\"like_for_like_price_sqft\", type number}, {\"price_index\", type number}, {\"raw_avg_price_sqft\", type number}, {\"raw_index\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "_Measures",
+        "columns": [
+          {
+            "name": "Column1",
+            "dataType": "string",
+            "sourceColumn": "Column1",
+            "isHidden": true,
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "_Measures",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #table(type table [Column1 = text], {})",
+                "in",
+                "    Source"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Sales",
+            "expression": [
+              "COUNTROWS ( fact_sales )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Sales Value (AED)",
+            "expression": [
+              "SUM ( fact_sales[price_aed] )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Value (AED bn)",
+            "expression": [
+              "DIVIDE ( [Sales Value (AED)], 1e9 )"
+            ],
+            "formatString": "0.00"
+          },
+          {
+            "name": "Avg Deal (AED M)",
+            "expression": [
+              "DIVIDE ( [Avg Deal Size (AED)], 1e6 )"
+            ],
+            "formatString": "0.00"
+          },
+          {
+            "name": "Avg Price per Sq Ft",
+            "expression": [
+              "DIVIDE ( SUM ( fact_sales[price_aed] ), SUM ( fact_sales[size_sqft] ) )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Median Price (AED)",
+            "expression": [
+              "MEDIAN ( fact_sales[price_aed] )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Avg Deal Size (AED)",
+            "expression": [
+              "DIVIDE ( [Sales Value (AED)], [Sales] )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Off-plan Sales",
+            "expression": [
+              "CALCULATE ( [Sales], fact_sales[is_offplan] = TRUE () )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Off-plan Share %",
+            "expression": [
+              "DIVIDE ( [Off-plan Sales], [Sales] )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Off-plan Premium %",
+            "expression": [
+              "VAR OffPlan = CALCULATE ( [Avg Price per Sq Ft], fact_sales[is_offplan] = TRUE () )",
+              "VAR Ready = CALCULATE ( [Avg Price per Sq Ft], fact_sales[is_offplan] = FALSE () )",
+              "RETURN DIVIDE ( OffPlan - Ready, Ready )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Sales Prev Month",
+            "expression": [
+              "CALCULATE ( [Sales], DATEADD ( dim_date[date], -1, MONTH ) )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Sales MoM %",
+            "expression": [
+              "DIVIDE ( [Sales] - [Sales Prev Month], [Sales Prev Month] )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Price per Sq Ft Prev Month",
+            "expression": [
+              "CALCULATE ( [Avg Price per Sq Ft], DATEADD ( dim_date[date], -1, MONTH ) )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Price MoM %",
+            "expression": [
+              "DIVIDE ( [Avg Price per Sq Ft] - [Price per Sq Ft Prev Month], [Price per Sq Ft Prev Month] )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Sales YTD",
+            "expression": [
+              "TOTALYTD ( [Sales], dim_date[date] )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Sales 3M Rolling",
+            "expression": [
+              "CALCULATE ( [Sales], DATESINPERIOD ( dim_date[date], MAX ( dim_date[date] ), -3, MONTH ) )"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Area Rank by Sales",
+            "expression": [
+              "IF ( HASONEVALUE ( dim_area[area] ), RANKX ( ALLSELECTED ( dim_area[area] ), [Sales], , DESC, DENSE ) )"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Share of Market Value %",
+            "expression": [
+              "DIVIDE ( [Sales Value (AED)], CALCULATE ( [Sales Value (AED)], ALLSELECTED ( dim_area ) ) )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Gross Yield %",
+            "expression": [
+              "AVERAGE ( fact_rent_yield[gross_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Years of Rent to Buy",
+            "expression": [
+              "AVERAGE ( fact_rent_yield[years_of_rent_to_buy] )"
+            ],
+            "formatString": "0.0"
+          },
+          {
+            "name": "Like-for-like Index",
+            "expression": [
+              "AVERAGE ( fact_price_index[price_index] )"
+            ],
+            "formatString": "0.0"
+          },
+          {
+            "name": "Simple Average Index",
+            "expression": [
+              "AVERAGE ( fact_price_index[raw_index] )"
+            ],
+            "formatString": "0.0"
+          },
+          {
+            "name": "Like-for-like Change %",
+            "expression": [
+              "VAR LastMonth = CALCULATE ( MAX ( fact_price_index[month] ), ALL ( fact_price_index ) )",
+              "RETURN DIVIDE ( CALCULATE ( AVERAGE ( fact_price_index[price_index] ), fact_price_index[month] = LastMonth, ALL ( fact_price_index ) ), 100 ) - 1"
+            ],
+            "formatString": "+0.0%;-0.0%;0.0%"
+          },
+          {
+            "name": "Simple Average Change %",
+            "expression": [
+              "VAR LastMonth = CALCULATE ( MAX ( fact_price_index[month] ), ALL ( fact_price_index ) )",
+              "RETURN DIVIDE ( CALCULATE ( AVERAGE ( fact_price_index[raw_index] ), fact_price_index[month] = LastMonth, ALL ( fact_price_index ) ), 100 ) - 1"
+            ],
+            "formatString": "+0.0%;-0.0%;0.0%"
+          },
+          {
+            "name": "Mix Effect (index points)",
+            "expression": [
+              "( [Simple Average Change %] - [Like-for-like Change %] ) * 100"
+            ],
+            "formatString": "+0.0;-0.0;0.0"
+          },
+          {
+            "name": "Share Under AED 2M",
+            "expression": [
+              "DIVIDE ( CALCULATE ( [Sales], fact_sales[price_band_order] <= 2 ), [Sales] )"
+            ],
+            "formatString": "0%"
+          },
+          {
+            "name": "Studios & 1-Beds Share",
+            "expression": [
+              "DIVIDE ( CALCULATE ( [Sales], dim_property[rooms] IN { \"Studio\", \"1 B/R\" } ), [Sales] )"
+            ],
+            "formatString": "0%"
+          },
+          {
+            "name": "Median Gross Yield",
+            "expression": [
+              "MEDIAN ( fact_rent_yield[gross_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Best Gross Yield",
+            "expression": [
+              "MAX ( fact_rent_yield[gross_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Areas Measured",
+            "expression": [
+              "COUNTROWS ( fact_rent_yield )"
+            ],
+            "formatString": "0"
+          },
+          {
+            "name": "Median Price (AED M)",
+            "expression": [
+              "DIVIDE ( [Median Price (AED)], 1e6 )"
+            ],
+            "formatString": "0.00"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "fact_sales_date_dim_date",
+        "fromTable": "fact_sales",
+        "fromColumn": "date",
+        "toTable": "dim_date",
+        "toColumn": "date"
+      },
+      {
+        "name": "fact_sales_area_key_dim_area",
+        "fromTable": "fact_sales",
+        "fromColumn": "area_key",
+        "toTable": "dim_area",
+        "toColumn": "area_key"
+      },
+      {
+        "name": "fact_sales_property_key_dim_property",
+        "fromTable": "fact_sales",
+        "fromColumn": "property_key",
+        "toTable": "dim_property",
+        "toColumn": "property_key"
+      },
+      {
+        "name": "fact_rent_yield_area_dim_area",
+        "fromTable": "fact_rent_yield",
+        "fromColumn": "area",
+        "toTable": "dim_area",
+        "toColumn": "area"
+      },
+      {
+        "name": "fact_price_index_month_dim_date",
+        "fromTable": "fact_price_index",
+        "fromColumn": "month",
+        "toTable": "dim_date",
+        "toColumn": "date"
+      }
+    ],
+    "expressions": [
+      {
+        "name": "DataFolder",
+        "kind": "m",
+        "expression": "\"C:\\Users\\nithe\\OneDrive\\Desktop\\Dubai-Real-Estate-Analysis\\powerbi\\model\\\" meta [IsParameterQuery = true, Type = \"Text\", IsParameterQueryRequired = true]"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DataFolder\", \"fact_sales\", \"dim_date\", \"dim_area\", \"dim_property\", \"fact_rent_yield\", \"fact_price_index\", \"_Measures\"]"
+      }
+    ]
+  }
+}

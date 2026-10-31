@@ -1,0 +1,93 @@
+{
+  "sales": 121741,
+  "value_aed": 376444647785.75964,
+  "first_day": "01 Jan 2026",
+  "last_day": "30 Sep 2026",
+  "months": 9,
+  "areas": 246,
+  "busiest_month": "January",
+  "busiest_month_sales": 17192,
+  "first_month": "January",
+  "last_month": "September",
+  "first_month_sales": 17192,
+  "last_month_sales": 11038,
+  "volume_change": -0.3579571893904141,
+  "index_peak": 104.1,
+  "index_peak_month": "April",
+  "offplan_share": 0.7522454305607147,
+  "offplan_share_first": 0.7368494391416429,
+  "offplan_share_last": 0.7150832104487045,
+  "offplan_premium": 0.2612173306550607,
+  "apartment_sqft_first": 2158.885833680134,
+  "apartment_sqft_last": 1890.1596279138753,
+  "apartment_sqft_change": -0.12447448659578997,
+  "villa_sqft_first": 1758.3004998347085,
+  "villa_sqft_last": 1701.6563700480938,
+  "villa_sqft_change": -0.032215272527045036,
+  "index_last": 97.7,
+  "raw_index_last": 87.6,
+  "index_areas": 47,
+  "lfl_change": -0.02300000000000002,
+  "raw_change": -0.12400000000000011,
+  "apartment_median_sqft": 1714.319490689753,
+  "top3_areas": [
+    "Madinat Al Mataar",
+    "Jumeirah Village Circle",
+    "Dubai Land Residence Complex"
+  ],
+  "top3_share": 0.24241440686839075,
+  "top3_below_median": 3,
+  "top15_below_median": 10,
+  "fastest_risers": [
+    [
+      "Down Town Jabal Ali",
+      26.3
+    ],
+    [
+      "Damac Hills",
+      16.3
+    ],
+    [
+      "Jabal Ali First",
+      11.1
+    ]
+  ],
+  "under_2m_share": 0.6836776485603528,
+  "one_bed_or_studio_share": 0.711810281645901,
+  "median_home_price": 1311500.0,
+  "top_project": "LUNAYA",
+  "top_project_area": "Saih Shuaib 1",
+  "top_project_value": 3155657901.75,
+  "top_project_share": 1.67,
+  "yield_areas_measured": 35,
+  "median_yield": 7.22,
+  "top_yields": [
+    [
+      "Dubai Investment Park Second",
+      9.71,
+      579697.0
+    ],
+    [
+      "Dubai Land Residence Complex",
+      9.34,
+      595000.0
+    ],
+    [
+      "Dubai Production City",
+      9.26,
+      590000.0
+    ]
+  ],
+  "low_yields": [
+    [
+      "Palm Jumeirah",
+      4.67
+    ],
+    [
+      "Dubai Harbour",
+      4.75
+    ]
+  ],
+  "yield_cheap_third": 8.285,
+  "yield_prime_third": 5.39
+}

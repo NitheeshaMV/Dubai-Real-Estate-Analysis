@@ -1,0 +1,247 @@
+area_key,area,nearest_metro,nearest_mall,nearest_landmark
+1,AL Athbah,,,
+2,Abu Hail,Abu Baker Al Siddique Metro Station,,Dubai International Airport
+3,Al Aweer First,,,
+4,Al Aweer Second,,,
+5,Al Bada,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+6,Al Baraha,Salah Al Din Metro Station,Dubai Mall,Dubai International Airport
+7,Al Barari,Noor Bank Metro Station,,IMG World Adventures
+8,Al Barsha First,Dubai Internet City,Mall of the Emirates,Burj Al Arab
+9,Al Barsha Second,Sharaf Dg Metro Station,Mall of the Emirates,Burj Al Arab
+10,Al Barsha Third,Sharaf Dg Metro Station,Mall of the Emirates,Sports City Swimming Academy
+11,Al Barshaa South First,Sharaf Dg Metro Station,Mall of the Emirates,Motor City
+12,Al Barshaa South Second,Dubai Internet City,Mall of the Emirates,Sports City Swimming Academy
+13,Al Barshaa South Third,Sharaf Dg Metro Station,Mall of the Emirates,Motor City
+14,Al Buteen,Al Ras Metro Station,Dubai Mall,Dubai International Airport
+15,Al Dhagaya,Palm Deira Metro Stations,Dubai Mall,Dubai International Airport
+16,Al Furjan,Ibn Battuta Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+17,Al Garhoud,Terminal 3,City Centre Mirdif,Dubai International Airport
+18,Al Goze First,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+19,Al Goze Fourth,,,
+20,Al Goze Industrial First,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+21,Al Goze Industrial Second,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+22,Al Goze Industrial Third,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Burj Al Arab
+23,Al Goze Third,Noor Bank Metro Station,Dubai Mall,Downtown Dubai
+24,Al Hamriya,Al Fahidi Metro Station,Dubai Mall,Dubai International Airport
+25,Al Hebiah Fifth,,,
+26,Al Hebiah First,,,
+27,Al Hebiah Fourth,,,
+28,Al Hebiah Sixth,,,
+29,Al Hebiah Third,,,
+30,Al Jadaf,,,
+31,Al Jafliya,Al Jafiliya Metro Station,Dubai Mall,Burj Khalifa
+32,Al Karama,ADCB Metro Station,Dubai Mall,Burj Khalifa
+33,Al Khabeesi,Abu Baker Al Siddique Metro Station,City Centre Mirdif,Dubai International Airport
+34,Al Khail Heights,Noor Bank Metro Station,Dubai Mall,Downtown Dubai
+35,Al Khairan First,,,
+36,Al Khawaneej First,Etisalat Metro Station,City Centre Mirdif,
+37,Al Khawaneej Second,,,
+38,Al Kheeran,Emirates Metro Station,City Centre Mirdif,Dubai International Airport
+39,Al Kifaf,Al Jafiliya Metro Station,Dubai Mall,Burj Khalifa
+40,Al Maha,,,
+41,Al Mamzer,Al Qiyadah Metro Station,City Centre Mirdif,Dubai International Airport
+42,Al Manara,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+43,Al Mararr,Baniyas Square Metro Station,Dubai Mall,Dubai International Airport
+44,Al Merkadh,,,
+45,Al Mizhar First,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+46,Al Mizhar Fourth,,,
+47,Al Mizhar Second,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+48,Al Mizhar Third,,,
+49,Al Murqabat,Al Rigga Metro Station,Dubai Mall,Dubai International Airport
+50,Al Muteena,Salah Al Din Metro Station,Dubai Mall,Dubai International Airport
+51,Al Nahda First,STADIUM Metro Station,City Centre Mirdif,Dubai International Airport
+52,Al Nahda Second,Al Nahda Metro Station,City Centre Mirdif,Dubai International Airport
+53,Al Qusais,Al Nahda Metro Station,City Centre Mirdif,Dubai International Airport
+54,Al Qusais Industrial Fifth,Al Qusais Metro Station,City Centre Mirdif,Dubai International Airport
+55,Al Qusais Industrial Fourth,Airport Free Zone,City Centre Mirdif,Dubai International Airport
+56,Al Qusais Industrial Second,Airport Free Zone,City Centre Mirdif,Dubai International Airport
+57,Al Raffa,Al Fahidi Metro Station,Dubai Mall,Burj Khalifa
+58,Al Ras,Al Ras Metro Station,Dubai Mall,Dubai International Airport
+59,Al Rashidiya,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+60,Al Rega,Union Metro Station,Dubai Mall,Dubai International Airport
+61,Al Rowaiyah First,,,
+62,Al Sabkha,Baniyas Square Metro Station,Dubai Mall,Dubai International Airport
+63,Al Saffa First,Noor Bank Metro Station,Dubai Mall,Downtown Dubai
+64,Al Saffa Second,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+65,Al Satwa,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+66,Al Suq Al Kabeer,Al Fahidi Metro Station,Dubai Mall,Dubai International Airport
+67,Al Thanyah Fifth,,,
+68,Al Thanyah Third,Nakheel Metro Station,Marina Mall,Burj Al Arab
+69,Al Ttay,,,
+70,Al Twar Fifth,Al Qusais Metro Station,City Centre Mirdif,Dubai International Airport
+71,Al Twar First,Al Nahda Metro Station,City Centre Mirdif,Dubai International Airport
+72,Al Twar Fourth,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+73,Al Twar Second,Al Qusais Metro Station,City Centre Mirdif,Dubai International Airport
+74,Al Twar Third,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+75,Al Waha,,,Dubai Cycling Course
+76,Al Waheda,Abu Hail Metro Station,,Dubai International Airport
+77,Al Warqa First,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+78,Al Warqa Fourth,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+79,Al Warqa Second,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+80,Al Warqa Third,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+81,Al Warsan Second,Rashidiya Metro Station,City Centre Mirdif,
+82,Al Warsan Third,,,
+83,Al Wasl,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Burj Khalifa
+84,Al Yelayiss 1,,,
+85,Al Yelayiss 2,,,
+86,Al Yelayiss 5,,,
+87,Al Yufrah 1,,,
+88,Arabian Ranches I,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Motor City
+89,Arabian Ranches II,,,Motor City
+90,Arabian Ranches III,,,Hamdan Sports Complex
+91,Arabian Ranches Polo Club,,,Motor City
+92,Arjan,Sharaf Dg Metro Station,Mall of the Emirates,Motor City
+93,Barsha Heights,Dubai Internet City,Mall of the Emirates,Burj Al Arab
+94,Bluewaters,Jumeirah Beach Residency,Marina Mall,Burj Al Arab
+95,Bukadra,,,
+96,Burj Khalifa,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Downtown Dubai
+97,Business Bay,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+98,Business Park,Creek Metro Station,Dubai Mall,Downtown Dubai
+99,Cherrywoods,,,Dubai Cycling Course
+100,City Of Arabia,,,IMG World Adventures
+101,City Walk,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Burj Khalifa
+102,DMCC-EZ2,Harbour Tower,Marina Mall,Sports City Swimming Academy
+103,Damac Hills,,,Motor City
+104,Discovery Gardens,Harbour Tower,Ibn-e-Battuta Mall,Sports City Swimming Academy
+105,Down Town Jabal Ali,UAE Exchange Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+106,Dubai Creek Harbour,Creek Metro Station,City Centre Mirdif,Dubai International Airport
+107,Dubai Design District,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Downtown Dubai
+108,Dubai Golf City,,,Sports City Swimming Academy
+109,Dubai Harbour,,,
+110,Dubai Healthcare City - Phase 1,Healthcare City Metro Station,Dubai Mall,Dubai International Airport
+111,Dubai Healthcare City - Phase 2,Al Jadaf Metro Station,Dubai Mall,Downtown Dubai
+112,Dubai Hills,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Motor City
+113,Dubai Industrial City,UAE Exchange Metro Station,,Dubai Parks and Resorts
+114,Dubai Investment Park First,DANUBE Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+115,Dubai Investment Park Second,DANUBE Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+116,Dubai Land Residence Complex,,,IMG World Adventures
+117,Dubai Lifestyle City,,,Hamdan Sports Complex
+118,Dubai Marina,Jumeirah Beach Residency,Marina Mall,Burj Al Arab
+119,Dubai Maritime City,Al Ghubaiba Metro Station,Dubai Mall,Burj Khalifa
+120,Dubai Production City,Damac Properties,Marina Mall,Sports City Swimming Academy
+121,Dubai Science Park,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Motor City
+122,Dubai South,UAE Exchange Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+123,Dubai Sports City,Nakheel Metro Station,Marina Mall,Sports City Swimming Academy
+124,Dubai Studio City,Dubai Internet City,Mall of the Emirates,Motor City
+125,Dubai Water Canal,Business Bay Metro Station,Dubai Mall,Burj Khalifa
+126,Dubai Water Front,UAE Exchange Metro Station,,Dubai Parks and Resorts
+127,Emaar South,,,Al Makhtoum International Airport
+128,Emirate Living,Damac Properties,Marina Mall,Sports City Swimming Academy
+129,Eyal Nasser,Palm Deira Metro Stations,Dubai Mall,Dubai International Airport
+130,Falcon City Of Wonders,,,IMG World Adventures
+131,Garden View,Ibn Battuta Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+132,Ghadeer Al tair,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+133,Grand Views,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+134,Hadaeq Sheikh Mohammed Bin Rashid,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+135,Hor Al Anz,Abu Hail Metro Station,City Centre Mirdif,Dubai International Airport
+136,Hor Al Anz East,Al Qiyadah Metro Station,City Centre Mirdif,Dubai International Airport
+137,Horizon,Creek Metro Station,Dubai Mall,Downtown Dubai
+138,International City Ph 1,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+139,International City Ph 2 & 3,Rashidiya Metro Station,City Centre Mirdif,
+140,Island 2,Business Bay Metro Station,Dubai Mall,Burj Khalifa
+141,Jabal Ali First,ENERGY Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+142,Jabal Ali Industrial First,DANUBE Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
+143,Jabal Ali Industrial Second,,,
+144,Jabel Ali Hills,,,Dubai Parks and Resorts
+145,Jaddaf Waterfront,Al Jadaf Metro Station,Dubai Mall,Dubai International Airport
+146,Jumeira Bay,Business Bay Metro Station,Dubai Mall,Burj Khalifa
+147,Jumeirah Beach Residence,Jumeirah Beach Resdency,Marina Mall,Burj Al Arab
+148,Jumeirah First,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+149,Jumeirah Golf,Damac Properties,Ibn-e-Battuta Mall,Sports City Swimming Academy
+150,Jumeirah Heights,Jumeirah Lakes Towers,Marina Mall,Sports City Swimming Academy
+151,Jumeirah Islands,Jumeirah Lakes Towers,Marina Mall,Sports City Swimming Academy
+152,Jumeirah Lakes Towers,Jumeirah Lakes Towers,Marina Mall,Sports City Swimming Academy
+153,Jumeirah Living,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Burj Al Arab
+154,Jumeirah Park,Harbour Tower,Marina Mall,Sports City Swimming Academy
+155,Jumeirah Second,Business Bay Metro Station,Dubai Mall,Burj Khalifa
+156,Jumeirah Third,Noor Bank Metro Station,Dubai Mall,Burj Khalifa
+157,Jumeirah Village Circle,Dubai Internet City,Marina Mall,Sports City Swimming Academy
+158,Jumeirah Village Triangle,Damac Properties,Marina Mall,Sports City Swimming Academy
+159,La Mer,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+160,Living Legends,First Abu Dhabi Bank Metro Station,,Global Village
+161,Liwan,,,IMG World Adventures
+162,Liwan 2,,,IMG World Adventures
+163,MBR District 1,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+164,MBR District 7,Noor Bank Metro Station,Dubai Mall,Downtown Dubai
+165,Madinat Al Mataar,,,
+166,Madinat Dubai Almelaheyah,,,
+167,Madinat Hind 4,,,
+168,Majan,,,IMG World Adventures
+169,Mankhool,Al Fahidi Metro Station,Dubai Mall,Burj Khalifa
+170,Marsa Dubai,Jumeirah Beach Resdency,Marina Mall,Burj Al Arab
+171,Me'Aisem First,,,
+172,Me'Aisem Second,,,
+173,Medyan Race Course Villas,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Downtown Dubai
+174,Meydan Avenue,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+175,Meydan One,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Downtown Dubai
+176,Millennium,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+177,Mina Rashid,Al Ghubaiba Metro Station,Dubai Mall,Burj Khalifa
+178,Mira,,,Dubai Cycling Course
+179,Mirdif,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+180,Motor City,Dubai Internet City,Mall of the Emirates,Sports City Swimming Academy
+181,Mudon,,,Dubai Cycling Course
+182,Muhaisanah First,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+183,Muhaisanah Fourth,Al Qusais Metro Station,City Centre Mirdif,Dubai International Airport
+184,Muhaisanah Second,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+185,Muhaisanah Third,Etisalat Metro Station,City Centre Mirdif,Dubai International Airport
+186,Nad Al Hamar,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+187,Nad Al Sheba Gardens,Business Bay Metro Station,Dubai Mall,IMG World Adventures
+188,Nad Al Shiba First,,,
+189,Nad Al Shiba Fourth,Creek Metro Station,City Centre Mirdif,IMG World Adventures
+190,Nad Al Shiba Second,Creek Metro Station,Dubai Mall,Downtown Dubai
+191,Nad Al Shiba Third,Creek Metro Station,City Centre Mirdif,
+192,Nad Shamma,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+193,Nadd Hessa,,,
+194,Naif,Baniyas Square Metro Station,Dubai Mall,Dubai International Airport
+195,Oud Metha,Healthcare City Metro Station,Dubai Mall,Burj Khalifa
+196,Palm Deira,Palm Deira Metro Stations,Dubai Mall,Dubai International Airport
+197,Palm Jabal Ali,,,
+198,Palm Jumeirah,Palm Jumeirah,Marina Mall,Burj Al Arab
+199,Palmarosa,,,Hamdan Sports Complex
+200,Pearl Jumeira,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+201,Polo Townhouses Igo,Business Bay Metro Station,Dubai Mall,Downtown Dubai
+202,Port Saeed,Deira City Centre,Dubai Mall,Dubai International Airport
+203,Ras Al Khor Industrial First,Creek Metro Station,Dubai Mall,Downtown Dubai
+204,Ras Al Khor Industrial Third,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+205,Rega Al Buteen,Al Rigga Metro Station,Dubai Mall,Dubai International Airport
+206,Remraam,,,Motor City
+207,Rukan,,,
+208,Saih Shuaib 1,,,
+209,Saih Shuaib 2,UAE Exchange Metro Station,,Dubai Parks and Resorts
+210,Saih Shuaib 3,,,
+211,Saih Shuaib 4,,,
+212,Sama Al Jadaf,Al Jadaf Metro Station,Dubai Mall,Burj Khalifa
+213,Serena,,,Hamdan Sports Complex
+214,Silicon Oasis,,City Centre Mirdif,IMG World Adventures
+215,Sobha Heartland,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Downtown Dubai
+216,Sufouh Gardens,Dubai Internet City,Mall of the Emirates,Burj Al Arab
+217,Sustainable City,,,Dubai Cycling Course
+218,TECOM Site A,Dubai Internet City,Mall of the Emirates,Burj Al Arab
+219,TECOM Site D,Marina Towers,Marina Mall,Burj Al Arab
+220,The Field,,,IMG World Adventures
+221,The Greens,Dubai Internet City,Marina Mall,Burj Al Arab
+222,The Lakes,Nakheel Metro Station,Marina Mall,Burj Al Arab
+223,The Valley,,,
+224,The Villa,,,IMG World Adventures
+225,The World,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+226,Tilal Al Ghaf,,,
+227,Town Square,,,Dubai Cycling Course
+228,Trade Center First,Financial Centre,Dubai Mall,Burj Khalifa
+229,Trade Center Second,Emirates Towers Metro Station,Dubai Mall,Burj Khalifa
+230,Um Al Sheif,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Burj Al Arab
+231,Um Hurair First,Burjuman Metro Station,Dubai Mall,Dubai International Airport
+232,Um Ramool,Emirates Metro Station,City Centre Mirdif,Dubai International Airport
+233,Um Suqaim First,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+234,Um Suqaim Second,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
+235,Um Suqaim Third,First Abu Dhabi Bank Metro Station,Mall of the Emirates,Burj Al Arab
+236,Villanova,,,IMG World Adventures
+237,Wadi Al Amardi,Etisalat Metro Station,City Centre Mirdif,
+238,Wadi Al Safa 2,,,IMG World Adventures
+239,Wadi Al Safa 3,,,IMG World Adventures
+240,Wadi Al Safa 4,,,IMG World Adventures
+241,Wadi Al Safa 5,,,
+242,Wadi Al Safa 7,,,Hamdan Sports Complex
+243,Warsan First,Rashidiya Metro Station,City Centre Mirdif,Dubai International Airport
+244,Warsan Fourth,,,
+245,Zaabeel First,Al Jafiliya Metro Station,Dubai Mall,Burj Khalifa
+246,Zaabeel Second,Financial Centre,Dubai Mall,Burj Khalifa

@@ -1,0 +1,7 @@
+,rows
+raw_rows,122551
+after_dedupe,122491
+valid_price_and_size,122197
+dropped_price_outliers,456
+clean_rows,121741
+rent_rows,34649

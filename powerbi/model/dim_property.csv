@@ -1,0 +1,63 @@
+property_key,segment,property_type,property_sub_type,rooms
+1,Apartment,Unit,Flat,1 B/R
+2,Apartment,Unit,Flat,2 B/R
+3,Apartment,Unit,Flat,3 B/R
+4,Apartment,Unit,Flat,4 B/R
+5,Apartment,Unit,Flat,5 B/R
+6,Apartment,Unit,Flat,6 B/R
+7,Apartment,Unit,Flat,Office
+8,Apartment,Unit,Flat,PENTHOUSE
+9,Apartment,Unit,Flat,Studio
+10,Apartment,Unit,Flat,Unknown
+11,Commercial,Unit,Office,Office
+12,Commercial,Unit,Office,Shop
+13,Commercial,Unit,Office,Unknown
+14,Commercial,Unit,Shop,Shop
+15,Commercial,Unit,Shop,Unknown
+16,Hotel,Unit,Hotel Apartment,1 B/R
+17,Hotel,Unit,Hotel Apartment,2 B/R
+18,Hotel,Unit,Hotel Apartment,3 B/R
+19,Hotel,Unit,Hotel Apartment,4 B/R
+20,Hotel,Unit,Hotel Apartment,5 B/R
+21,Hotel,Unit,Hotel Apartment,Studio
+22,Hotel,Unit,Hotel Apartment,Unknown
+23,Hotel,Unit,Hotel Rooms,1 B/R
+24,Hotel,Unit,Hotel Rooms,2 B/R
+25,Hotel,Unit,Hotel Rooms,3 B/R
+26,Hotel,Unit,Hotel Rooms,Studio
+27,Land,Land,Agricultural,Unknown
+28,Land,Land,Airport,Unknown
+29,Land,Land,Commercial,Unknown
+30,Land,Land,General Use,Unknown
+31,Land,Land,Government Housing,Unknown
+32,Land,Land,Industrial,Unknown
+33,Land,Land,Labor Camp,Unknown
+34,Land,Land,Land,Unknown
+35,Land,Land,Residential,Unknown
+36,Land,Land,Residential / Attached Villas,Unknown
+37,Land,Land,Residential / Residential Villa,Unknown
+38,Land,Land,Residential / Villas,Unknown
+39,Land,Land,Residential Flats,Unknown
+40,Land,Land,School,Unknown
+41,Land,Land,Shop,Unknown
+42,Land,Land,Shopping Mall,Unknown
+43,Land,Land,Sports Club,Unknown
+44,Land,Land,Unit,Unknown
+45,Land,Land,Villa,Unknown
+46,Land,Land,Warehouse,Unknown
+47,Land,Land,,Unknown
+48,Other,Building,Building,Unknown
+49,Other,Unit,Gymnasium,Unknown
+50,Other,Unit,Show Rooms,Shop
+51,Other,Unit,Show Rooms,Unknown
+52,Other,Unit,Stacked Townhouses,2 B/R
+53,Other,Unit,Stacked Townhouses,3 B/R
+54,Other,Unit,Warehouse,Unknown
+55,Other,Unit,Workshop,Unknown
+56,Villa,Building,Villa,1 B/R
+57,Villa,Building,Villa,2 B/R
+58,Villa,Building,Villa,3 B/R
+59,Villa,Building,Villa,4 B/R
+60,Villa,Building,Villa,5 B/R
+61,Villa,Building,Villa,6 B/R
+62,Villa,Building,Villa,7 B/R

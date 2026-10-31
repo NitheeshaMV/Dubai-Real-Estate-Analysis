@@ -1,0 +1,8 @@
+# Raw DLD exports and generated data are large; the README explains how to download them.
+data/raw/
+data/clean/*.parquet
+data/*.duckdb
+data/*.duckdb.wal
+powerbi/model/fact_sales.csv
+__pycache__/
+.ipynb_checkpoints/
