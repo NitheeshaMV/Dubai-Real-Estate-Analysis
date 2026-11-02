@@ -5,7 +5,10 @@
 -- with both ready sales and new leases are used — rent and price come from the same buildings.
 -- Gross yield = median annual rent per sq ft ÷ median sale price per sq ft (ready apartments only,
 -- so off-plan premiums do not distort it).
--- Skills shown: bridge table between two sources, multi-CTE join, sample-size guards, RANK().
+-- Net yield = (rent per sq ft − annual service charge per sq ft) ÷ price per sq ft. The service charge is the
+-- 2026 RERA-approved rate (DLD Service Charge Index) of the area's most-leased building in the index, so it is
+-- net of service charges only — not of vacancy, maintenance inside the unit or agency fees.
+-- Skills shown: bridge table between two sources, multi-CTE join, sample-size guards, LEFT JOIN to a lookup, RANK().
 WITH building_area AS (          -- the sales area each building belongs to
     SELECT project, MODE(area) AS area
     FROM sales
@@ -50,6 +53,11 @@ SELECT
     ROUND(median_rent_sqft, 1)                             AS median_rent_sqft,
     ROUND(100.0 * median_rent_sqft / median_price_sqft, 2) AS gross_yield_pct,
     ROUND(median_price_sqft / median_rent_sqft, 1)         AS years_of_rent_to_buy,
-    RANK() OVER (ORDER BY median_rent_sqft / median_price_sqft DESC) AS yield_rank
+    RANK() OVER (ORDER BY median_rent_sqft / median_price_sqft DESC) AS yield_rank,
+    sc.dld_project                                         AS service_charge_building,
+    sc.service_charge_aed_sqft,
+    ROUND(100.0 * (median_rent_sqft - sc.service_charge_aed_sqft) / median_price_sqft, 2) AS net_yield_pct,
+    ROUND(100.0 * sc.service_charge_aed_sqft / median_rent_sqft, 1)                     AS service_charge_share_of_rent_pct
 FROM sale JOIN rent USING (area)
+LEFT JOIN service_charges sc USING (area)         -- areas without an index entry keep gross yield only
 ORDER BY gross_yield_pct DESC;

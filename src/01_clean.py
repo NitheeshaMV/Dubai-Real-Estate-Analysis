@@ -9,7 +9,7 @@ import duckdb
 import pandas as pd
 
 from config import (CLEAN_DIR, DB_PATH, MAX_PRICE_SQFT, MIN_PRICE_SQFT,
-                    MIN_SIZE_SQM, RAW_DIR, SQM_TO_SQFT)
+                    MIN_SIZE_SQM, RAW_DIR, REFERENCE_DIR, SQM_TO_SQFT)
 
 # DLD column -> our column. The export uses these names (English fields end in _EN).
 COLUMNS = {
@@ -161,6 +161,12 @@ def clean_rents() -> pd.DataFrame | None:
     print(f"loaded {len(files)} rent file(s): {len(raw):,} rows")
     # Same duplication as sales (one row per nearby metro): drop it before trimming columns.
     raw = raw.drop_duplicates(subset=[c for c in raw.columns if not c.startswith("NEAREST_")])
+    # Some contracts are also repeated once per sub-project of a master community (e.g. one Creek Beach
+    # lease listed under all 12 Creek Beach buildings). The real building is unknown, so drop them all.
+    same_but_project = [c for c in raw.columns if c != "PROJECT_EN" and not c.startswith("NEAREST_")]
+    ambiguous = raw.duplicated(subset=same_but_project, keep=False)
+    print(f"leases listed under several buildings (dropped): {int(ambiguous.sum()):,} rows")
+    raw = raw[~ambiguous]
     df = raw[[c for c in RENT_COLUMNS if c in raw.columns]].rename(columns=RENT_COLUMNS)
     for col in df.select_dtypes("object"):
         df[col] = df[col].str.strip()                  # e.g. "Studio " has a trailing space
@@ -178,6 +184,21 @@ def clean_rents() -> pd.DataFrame | None:
     return df.reset_index(drop=True)
 
 
+def load_service_charges(con) -> None:
+    """RERA-approved service charges (DLD Service Charge Index) for each yield area's most-leased building.
+
+    DLD only shows these one project at a time behind a captcha, so they were looked up by hand into
+    data/reference/service_charges_2026.csv. Without the file the table is empty and only gross yield is shown.
+    """
+    path = REFERENCE_DIR / "service_charges_2026.csv"
+    if path.exists():
+        con.execute("CREATE OR REPLACE TABLE service_charges AS SELECT * FROM read_csv(?, header = true)", [str(path)])
+    else:
+        con.execute("CREATE OR REPLACE TABLE service_charges (area VARCHAR, dld_project VARCHAR, "
+                    "budget_year INTEGER, service_charge_aed_sqft DOUBLE)")
+    print(f"service charges: {con.execute('SELECT COUNT(*) FROM service_charges').fetchone()[0]} areas")
+
+
 def main() -> None:
     df, log = clean(load_raw())
     out = CLEAN_DIR / "sales_clean.parquet"
@@ -190,6 +211,7 @@ def main() -> None:
             con.register("rents_df", rents)
             con.execute("CREATE OR REPLACE TABLE rents AS SELECT * FROM rents_df")
             log["rent_rows"] = len(rents)
+        load_service_charges(con)
     pd.Series(log).to_csv(CLEAN_DIR / "cleaning_log.csv", header=["rows"])
     for k, v in log.items():
         print(f"{k:>24}: {v:,}")

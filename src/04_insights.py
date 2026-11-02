@@ -94,6 +94,26 @@ def main() -> None:
             f["yield_cheap_third"], f["yield_prime_third"] = one(con, """
                 SELECT MEDIAN(gross_yield_pct) FILTER (WHERE t = 1), MEDIAN(gross_yield_pct) FILTER (WHERE t = 3)
                 FROM (SELECT gross_yield_pct, NTILE(3) OVER (ORDER BY median_price_sqft) t FROM mart_rental_yield)""")
+            # Net of service charges: same thirds, only areas with a DLD Service Charge Index rate
+            f["net_areas"] = one(con, "SELECT COUNT(net_yield_pct) FROM mart_rental_yield")
+            if f["net_areas"]:
+                f["median_net_yield"], f["median_gross_of_net_areas"], f["median_sc_share"] = one(con, """
+                    SELECT MEDIAN(net_yield_pct), MEDIAN(gross_yield_pct) FILTER (WHERE net_yield_pct IS NOT NULL),
+                           MEDIAN(service_charge_share_of_rent_pct) FROM mart_rental_yield""")
+                (f["net_cheap_third"], f["net_prime_third"], f["gross_cheap_third_net_areas"], f["gross_prime_third_net_areas"],
+                 f["sc_share_cheap_third"], f["sc_share_prime_third"]) = one(con, """
+                    SELECT MEDIAN(net_yield_pct) FILTER (WHERE t = 1), MEDIAN(net_yield_pct) FILTER (WHERE t = 3),
+                           MEDIAN(gross_yield_pct) FILTER (WHERE t = 1 AND net_yield_pct IS NOT NULL),
+                           MEDIAN(gross_yield_pct) FILTER (WHERE t = 3 AND net_yield_pct IS NOT NULL),
+                           MEDIAN(service_charge_share_of_rent_pct) FILTER (WHERE t = 1),
+                           MEDIAN(service_charge_share_of_rent_pct) FILTER (WHERE t = 3)
+                    FROM (SELECT *, NTILE(3) OVER (ORDER BY median_price_sqft) t FROM mart_rental_yield)""")
+                f["top_net_yields"] = [list(r) for r in con.execute("""
+                    SELECT area, net_yield_pct, service_charge_aed_sqft FROM mart_rental_yield
+                    WHERE net_yield_pct IS NOT NULL ORDER BY net_yield_pct DESC LIMIT 3""").fetchall()]
+                f["low_net_yield"] = list(con.execute("""
+                    SELECT area, net_yield_pct, service_charge_aed_sqft FROM mart_rental_yield
+                    WHERE net_yield_pct IS NOT NULL ORDER BY net_yield_pct LIMIT 1""").fetchone())
 
     pct = lambda x: f"{x * 100:.0f}%"
     bn = lambda x: f"AED {x / 1e9:,.0f} bn"
@@ -132,6 +152,19 @@ def main() -> None:
             f"{f['yield_cheap_third']:.1f}% gross rental yield vs {f['yield_prime_third']:.1f}% for the priciest third. "
             f"Top: {ty[0][0]} ({ty[0][1]:.1f}%), {ty[1][0]} ({ty[1][1]:.1f}%), {ty[2][0]} ({ty[2][1]:.1f}%); "
             f"lowest: {f['low_yields'][0][0]} ({f['low_yields'][0][1]:.1f}%).")
+    if f.get("net_areas", 0) >= 9 and None not in (f["net_cheap_third"], f["net_prime_third"]):
+        gap_gross = f["gross_cheap_third_net_areas"] - f["gross_prime_third_net_areas"]
+        gap_net = f["net_cheap_third"] - f["net_prime_third"]
+        gap_note = ("narrows" if gap_net < gap_gross - 0.1 else "widens" if gap_net > gap_gross + 0.1 else "barely changes")
+        tn = f["top_net_yields"]
+        insights.append(
+            f"<b>After service charges:</b> using each area's 2026 DLD service-charge rate ({f['net_areas']} areas), the median "
+            f"yield drops from {f['median_gross_of_net_areas']:.1f}% gross to {f['median_net_yield']:.1f}% net — service charges "
+            f"take a median {f['median_sc_share']:.0f}% of the rent. The cheapest third still earns {f['net_cheap_third']:.1f}% net "
+            f"vs {f['net_prime_third']:.1f}% for the priciest third, so the gap {gap_note} "
+            f"({gap_gross:.1f} points gross, {gap_net:.1f} net); service charges take {f['sc_share_cheap_third']:.0f}% of rent "
+            f"in the cheapest third vs {f['sc_share_prime_third']:.0f}% in the priciest. Top net: {tn[0][0]} ({tn[0][1]:.1f}%); "
+            f"lowest: {f['low_net_yield'][0]} ({f['low_net_yield'][1]:.1f}%).")
 
     (OUT / "facts.json").write_text(json.dumps(f, indent=2, default=str), encoding="utf-8")
     (OUT / "insights.json").write_text(json.dumps(insights, indent=2, ensure_ascii=False), encoding="utf-8")

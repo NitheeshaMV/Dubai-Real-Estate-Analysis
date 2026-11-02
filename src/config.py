@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW_DIR = ROOT / "data" / "raw"
 CLEAN_DIR = ROOT / "data" / "clean"
 MARTS_DIR = ROOT / "data" / "marts"
+REFERENCE_DIR = ROOT / "data" / "reference"   # small hand-collected lookups (committed)
 SQL_DIR = ROOT / "sql"
 DB_PATH = ROOT / "data" / "dubai_real_estate.duckdb"
 DASHBOARD_DIR = ROOT / "dashboard"

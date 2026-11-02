@@ -392,6 +392,33 @@
             "formatString": "0"
           },
           {
+            "name": "service_charge_building",
+            "dataType": "string",
+            "sourceColumn": "service_charge_building",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "service_charge_aed_sqft",
+            "dataType": "double",
+            "sourceColumn": "service_charge_aed_sqft",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "net_yield_pct",
+            "dataType": "double",
+            "sourceColumn": "net_yield_pct",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "service_charge_share_of_rent_pct",
+            "dataType": "double",
+            "sourceColumn": "service_charge_share_of_rent_pct",
+            "summarizeBy": "none",
+            "formatString": "0.0"
+          },
+          {
             "name": "median_price_aed_m",
             "dataType": "double",
             "sourceColumn": "median_price_aed_m",
@@ -416,7 +443,7 @@
                 "let",
                 "    Source = Csv.Document(File.Contents(DataFolder & \"fact_rent_yield.csv\"), [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
                 "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),",
-                "    Typed = Table.TransformColumnTypes(Promoted, {{\"area\", type text}, {\"buildings\", Int64.Type}, {\"ready_sales\", Int64.Type}, {\"leases\", Int64.Type}, {\"median_price_aed\", type number}, {\"median_annual_rent_aed\", type number}, {\"median_price_sqft\", type number}, {\"median_rent_sqft\", type number}, {\"gross_yield_pct\", type number}, {\"years_of_rent_to_buy\", type number}, {\"yield_rank\", Int64.Type}, {\"median_price_aed_m\", type number}, {\"median_annual_rent_aed_k\", type number}}, \"en-US\")",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"area\", type text}, {\"buildings\", Int64.Type}, {\"ready_sales\", Int64.Type}, {\"leases\", Int64.Type}, {\"median_price_aed\", type number}, {\"median_annual_rent_aed\", type number}, {\"median_price_sqft\", type number}, {\"median_rent_sqft\", type number}, {\"gross_yield_pct\", type number}, {\"years_of_rent_to_buy\", type number}, {\"yield_rank\", Int64.Type}, {\"service_charge_building\", type text}, {\"service_charge_aed_sqft\", type number}, {\"net_yield_pct\", type number}, {\"service_charge_share_of_rent_pct\", type number}, {\"median_price_aed_m\", type number}, {\"median_annual_rent_aed_k\", type number}}, \"en-US\")",
                 "in",
                 "    Typed"
               ]
@@ -728,6 +755,48 @@
               "COUNTROWS ( fact_rent_yield )"
             ],
             "formatString": "0"
+          },
+          {
+            "name": "Net Yield %",
+            "expression": [
+              "AVERAGE ( fact_rent_yield[net_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Gross Yield (net areas) %",
+            "expression": [
+              "IF ( NOT ISBLANK ( [Net Yield %] ), [Gross Yield %] )"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Service Charge (AED/sq ft)",
+            "expression": [
+              "AVERAGE ( fact_rent_yield[service_charge_aed_sqft] )"
+            ],
+            "formatString": "0.00"
+          },
+          {
+            "name": "Median Net Yield",
+            "expression": [
+              "MEDIAN ( fact_rent_yield[net_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Best Net Yield",
+            "expression": [
+              "MAX ( fact_rent_yield[net_yield_pct] ) / 100"
+            ],
+            "formatString": "0.0%"
+          },
+          {
+            "name": "Service Charge Share of Rent",
+            "expression": [
+              "MEDIAN ( fact_rent_yield[service_charge_share_of_rent_pct] ) / 100"
+            ],
+            "formatString": "0%"
           },
           {
             "name": "Median Price (AED M)",

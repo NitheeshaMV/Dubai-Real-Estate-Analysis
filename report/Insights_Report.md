@@ -1,7 +1,8 @@
 # Dubai Property Market, Jan–Sep 2026 — Insights & Recommendations
 
 **Nitheesha M V** · Source: Dubai Land Department open data · **121,741 sales worth AED 376 bn**, 1 Jan – 30 Sep 2026
-(apartments 95,510 · villas 9,481 · land 9,409 · commercial 4,861 · hotel 2,455) · plus **34,649 new residential leases** (Ejari, September 2026)
+(apartments 95,510 · villas 9,481 · land 9,409 · commercial 4,861 · hotel 2,455) · plus **25,988 new residential leases** (Ejari, September 2026)
+and 2026 RERA-approved service charges (DLD Service Charge Index)
 
 ## The headline
 Dubai's market is still large but **cooling**: fewer sales each month, prices **easing slightly** since an April
@@ -35,11 +36,18 @@ rising — Down Town Jabal Ali +26%, Damac Hills +16%, Jabal Ali First +11%, Mad
 falling — Business Bay −20%, Palm Jumeirah −19%, Al Hebiah First −15%.
 *Caveat:* inside one area, a luxury launch early in the year can move the median on its own — check the project mix before acting.
 
-**7. Cheaper areas pay back faster.** Gross rental yield for apartments across 35 areas (rent and price from the
-same buildings) has a median of 7.2%. The cheapest third of areas earns a median **8.3%** vs **5.4%** for the priciest third.
-Highest: Dubai Investment Park Second 9.7%, Dubai Land Residence Complex 9.3%, Dubai Production City 9.3%, Majan 9.2%,
-International City Ph 1 9.0%. Lowest: Palm Jumeirah 4.7%, Dubai Harbour 4.8%, La Mer 4.9%.
+**7. Cheaper areas pay back faster.** Gross rental yield for apartments across 31 areas (rent and price from the
+same buildings) has a median of 7.0%. The cheapest third of areas earns a median **8.2%** vs **5.4%** for the priciest third.
+Highest: Dubai Investment Park Second 9.7%, Dubai Land Residence Complex 9.3%, International City Ph 1 9.1%,
+Dubai Production City 8.9%. Lowest: Palm Jumeirah 4.7%, Dubai Harbour 4.8%, Dubai Creek Harbour 5.2%.
 In years of rent needed to pay the price: ~11 years in the top areas vs ~21 on Palm Jumeirah.
+
+**8. After service charges, cheaper areas still win — but by less.** Owners pay a yearly RERA-approved service charge
+per sq ft. Using the 2026 rate of each area's most-rented building (11 areas so far), the median yield falls from
+6.4% gross to **5.6% net**. The cheapest third nets **7.1%** vs **4.5%** for the priciest third: the gap narrows from
+3.3 to 2.6 points, because service charges take **17% of the rent** in cheaper areas (AED 12–17 per sq ft a year on rents of
+AED 72–79 per sq ft) vs **13%** in prime ones (AED 16–19 on rents of AED 123–158). Highest net: Dubai Land Residence Complex 7.8%,
+Dubai Production City 7.4%, Silicon Oasis 6.9%. Lowest: Palm Jumeirah 4.1%, Dubai Harbour 4.2%.
 
 **Top home projects by sales value:** LUNAYA (Saih Shuaib 1, AED 3.2 bn), Hado by Beyond (Palm Deira, AED 2.5 bn),
 Creek Bay (Al Khairan First, AED 2.2 bn) — all 100% off-plan.
@@ -52,10 +60,11 @@ Creek Bay (Al Khairan First, AED 2.2 bn) — all 100% off-plan.
 - **Negotiate:** like-for-like prices are 6.1% below the April peak and still easing.
 
 **For investors**
-- **For rental income, go affordable:** Dubai Production City, Dubai Land Residence Complex, Majan, International City
-  and Silicon Oasis yield 8–9% gross; Jumeirah Village Circle (the deepest market, 168 buildings) yields 7.2%.
-- **Prime areas (Palm Jumeirah, Dubai Harbour, La Mer: under 5%) only work as a bet on price growth** — and Palm Jumeirah's
-  median price per sq ft fell this year, so check the project mix before buying there.
+- **For rental income, go affordable — and compare net, not gross:** Dubai Land Residence Complex, Dubai Production City
+  and Silicon Oasis keep 7–8% after service charges; Jumeirah Village Circle (the deepest market) yields 7.2% gross, 5.9% net.
+  Service charges eat a bigger share of rent in cheaper buildings, so ask for the building's Service Charge Index rate before buying.
+- **Prime areas (Palm Jumeirah, Dubai Harbour: under 5% gross, about 4% net) only work as a bet on price growth** — and
+  Palm Jumeirah's median price per sq ft fell this year, so check the project mix before buying there.
 - **Prefer areas with both liquidity and rising prices** — easier to resell: Madinat Al Mataar, Jabal Ali First, Dubai Production City.
 - **Justify the 26% off-plan premium** with the payment plan and expected growth; with prices easing, ready units carry less risk.
 - **Check before buying in falling areas** (Business Bay, Palm Jumeirah): confirm whether the drop is real or a launch-mix effect.
@@ -73,7 +82,9 @@ interactive dashboard and Power BI model. Details: [README](../README.md) · [No
 - Current-year data only → no year-on-year comparison or seasonality adjustment. *Next:* add 2024–2025 from Dubai Pulse.
 - Some villa launches (e.g. Mareva at The Oasis, Eden Hills) are registered as land plots, so off-plan villa activity is understated.
 - Rent records name areas differently from sales (official land areas vs communities), so yields are matched through
-  building names; leases cover one month (September) and yields are gross. *Next:* more months of leases, net yields
-  (service charges), and a 6-month price forecast.
+  building names; leases cover one month (September). Leases listed under several buildings were dropped.
+- Net yields deduct service charges only (not vacancy, maintenance inside the unit or agency fees) and use one building's
+  2026 rate per area (11 of 31 areas). *Next:* service charges for the remaining areas, more months of leases, and a
+  6-month price forecast.
 
 *Personal portfolio project on public data. Not investment advice.*

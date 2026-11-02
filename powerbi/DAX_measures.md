@@ -71,6 +71,20 @@ DIVIDE ( [Sales Value (AED)], CALCULATE ( [Sales Value (AED)], ALLSELECTED ( dim
 Gross Yield % = AVERAGE ( fact_rent_yield[gross_yield_pct] ) / 100
 
 Years of Rent to Buy = AVERAGE ( fact_rent_yield[years_of_rent_to_buy] )
+
+-- Net of service charges: 2026 DLD Service Charge Index rate of each area's most-rented building
+Net Yield % = AVERAGE ( fact_rent_yield[net_yield_pct] ) / 100
+
+Service Charge (AED/sq ft) = AVERAGE ( fact_rent_yield[service_charge_aed_sqft] )
+
+-- Gross only where net is known, so a gross-vs-net chart lists just the areas with a service charge
+Gross Yield (net areas) % = IF ( NOT ISBLANK ( [Net Yield %] ), [Gross Yield %] )
+
+Median Net Yield = MEDIAN ( fact_rent_yield[net_yield_pct] ) / 100
+
+Best Net Yield = MAX ( fact_rent_yield[net_yield_pct] ) / 100
+
+Service Charge Share of Rent = MEDIAN ( fact_rent_yield[service_charge_share_of_rent_pct] ) / 100
 ```
 
 ## Formatting tips

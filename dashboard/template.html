@@ -218,8 +218,9 @@ footer p { margin: 4px 0; }
       <div class="table-scroll"><table id="t-areas"></table></div>
     </div>
     <div class="card wide" id="yield-card" hidden>
-      <h2>Where do apartments pay back fastest? Gross rental yield by area</h2>
-      <p class="desc">Median annual rent per sq ft of new leases (<span id="yield-period"></span>) ÷ median sale price per sq ft of ready apartments, using only buildings that appear in both — so rent and price come from the same towers. Areas with 3+ buildings, 50+ ready sales and 50+ leases. Gross — before service charges, vacancy and fees. Not affected by the filters.</p>
+      <h2>Where do apartments pay back fastest? Rental yield by area, before and after service charges</h2>
+      <p class="desc">Gross = median annual rent per sq ft of new leases (<span id="yield-period"></span>) ÷ median sale price per sq ft of ready apartments, using only buildings that appear in both — so rent and price come from the same towers. Areas with 3+ buildings, 50+ ready sales and 50+ leases. Net = rent minus the 2026 RERA-approved service charge (DLD Service Charge Index) of the area's most-leased building, ÷ price; vacancy, maintenance and fees are not deducted. The chart shows the areas with a service-charge rate; the table lists every area. Not affected by the filters.</p>
+      <div class="legend" id="yield-legend" hidden><span style="--c:var(--series-1)">Gross yield</span><span style="--c:var(--series-2)">Net of service charges</span></div>
       <div class="chart tall"><canvas id="c-yield" role="img" aria-label="Bar chart of the 15 areas with the highest gross rental yield"></canvas></div>
       <div class="table-scroll" style="margin-top:12px"><table id="t-yield"></table></div>
     </div>
@@ -403,26 +404,40 @@ function renderYield() {
   if (!ry.length) return;
   $("yield-card").hidden = false;
   $("yield-period").textContent = DATA.rentPeriod || "";
-  const top = ry.slice(0, 15);
+  const hasNet = ry.some((r) => r[8] != null);
+  // With service charges: chart the areas that have them, best net first (the table still lists every area)
+  const top = hasNet ? ry.filter((r) => r[8] != null).sort((a, b) => b[8] - a[8]) : ry.slice(0, 15);
+  $("yield-legend").hidden = !hasNet;
+  const bar = (label, i, color) => ({ label, data: top.map((r) => r[i]), backgroundColor: color,
+    borderRadius: { topRight: 4, bottomRight: 4 }, borderSkipped: "left", maxBarThickness: hasNet ? 10 : 18 });
+  const datasets = [bar("Gross yield", 5, css("--series-1"))];
+  if (hasNet) datasets.push(bar("Net of service charges", 8, css("--series-2")));
   upsert("c-yield", {
     type: "bar",
-    data: { labels: top.map((r) => r[0]), datasets: [{ label: "Gross yield", data: top.map((r) => r[5]),
-      backgroundColor: css("--series-1"), borderRadius: { topRight: 4, bottomRight: 4 }, borderSkipped: "left", maxBarThickness: 18 }] },
+    data: { labels: top.map((r) => r[0]), datasets },
     plugins: [{ id: "barLabels", afterDatasetsDraw(chart) {
-      const { ctx } = chart; const meta = chart.getDatasetMeta(0);
-      ctx.save(); ctx.font = "12px system-ui, sans-serif"; ctx.fillStyle = css("--text-secondary"); ctx.textBaseline = "middle";
-      meta.data.forEach((bar, i) => ctx.fillText(top[i][5].toFixed(1) + "%", bar.x + 6, bar.y)); ctx.restore();
+      const { ctx } = chart;
+      ctx.save(); ctx.font = (hasNet ? "11px" : "12px") + " system-ui, sans-serif"; ctx.fillStyle = css("--text-secondary"); ctx.textBaseline = "middle";
+      chart.data.datasets.forEach((ds, d) => chart.getDatasetMeta(d).data.forEach((b, i) => {
+        if (ds.data[i] != null) ctx.fillText(ds.data[i].toFixed(1) + "%", b.x + 6, b.y); }));
+      ctx.restore();
     } }],
     options: baseOptions({
       indexAxis: "y", interaction: { mode: "nearest", axis: "y", intersect: false }, layout: { padding: { right: 40 } },
       scales: { x: { grid: { color: css("--grid") }, border: { display: false }, ticks: { color: css("--muted"), callback: (v) => v + "%" }, beginAtZero: true },
-                y: { grid: { display: false }, border: { color: css("--axis") }, ticks: { color: css("--text-secondary"), autoSkip: false } } },
+                y: { grid: { display: false }, border: { color: css("--axis") }, ticks: { color: css("--text-secondary"), autoSkip: false,
+                     // phones: shorten long area names instead of letting the axis clip them
+                     callback(v) { const l = this.getLabelForValue(v); return window.innerWidth < 600 && l.length > 18 ? l.slice(0, 17) + "…" : l; } } } },
       plugins: { ...baseOptions().plugins, tooltip: { ...baseOptions().plugins.tooltip, callbacks: { label: (c) => { const r = top[c.dataIndex];
+        if (c.datasetIndex === 1) return r[8] == null ? null : [` ${r[8].toFixed(1)}% net of service charges`, ` Service charge AED ${r[9].toFixed(2)}/sq ft = ${r[10].toFixed(0)}% of rent`];
         return [` ${r[5].toFixed(1)}% gross yield (${r[6].toFixed(1)} years of rent to buy)`, ` Median price AED ${fmtAED(r[3])} · median rent AED ${fmtInt(r[4])}/yr`]; } } } },
     }),
   });
-  $("t-yield").innerHTML = "<thead><tr><th>Area</th><th>Gross yield</th><th>Years to pay back</th><th>Median price (AED)</th><th>Median rent (AED/yr)</th><th>Buildings</th><th>Ready sales</th><th>New leases</th></tr></thead><tbody>" +
-    ry.map((r) => `<tr><td>${r[0]}</td><td>${r[5].toFixed(1)}%</td><td>${r[6].toFixed(1)}</td><td>${fmtAED(r[3])}</td><td>${fmtInt(r[4])}</td><td>${fmtInt(r[7])}</td><td>${fmtInt(r[1])}</td><td>${fmtInt(r[2])}</td></tr>`).join("") + "</tbody>";
+  const na = "n/a";
+  const netCols = hasNet ? "<th>Net of service charges</th><th>Service charge (AED/sq ft)</th>" : "";
+  const netCells = (r) => hasNet ? `<td>${r[8] != null ? r[8].toFixed(1) + "%" : na}</td><td>${r[9] != null ? r[9].toFixed(2) : na}</td>` : "";
+  $("t-yield").innerHTML = `<thead><tr><th>Area</th><th>Gross yield</th>${netCols}<th>Years to pay back</th><th>Median price (AED)</th><th>Median rent (AED/yr)</th><th>Buildings</th><th>Ready sales</th><th>New leases</th></tr></thead><tbody>` +
+    ry.map((r) => `<tr><td>${r[0]}</td><td>${r[5].toFixed(1)}%</td>${netCells(r)}<td>${r[6].toFixed(1)}</td><td>${fmtAED(r[3])}</td><td>${fmtInt(r[4])}</td><td>${fmtInt(r[7])}</td><td>${fmtInt(r[1])}</td><td>${fmtInt(r[2])}</td></tr>`).join("") + "</tbody>";
 }
 
 function areaStats() {

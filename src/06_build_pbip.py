@@ -4,6 +4,7 @@ A .pbip is Power BI Desktop's text format: the semantic model (tables, relations
 measures) as model.bim and the report pages as report.json. Open the .pbip in Power BI
 Desktop, click Refresh, then File -> Save as -> .pbix.
 """
+import csv
 import json
 
 from config import POWERBI_DIR
@@ -70,6 +71,10 @@ TABLES = {
         ("gross_yield_pct", "double", "type number", "0.00", "none"),
         ("years_of_rent_to_buy", "double", "type number", "0.0", "none"),
         ("yield_rank", "int64", "Int64.Type", "0", "none"),
+        ("service_charge_building", "string", "type text", None, "none"),
+        ("service_charge_aed_sqft", "double", "type number", "0.00", "none"),
+        ("net_yield_pct", "double", "type number", "0.00", "none"),
+        ("service_charge_share_of_rent_pct", "double", "type number", "0.0", "none"),
         ("median_price_aed_m", "double", "type number", "0.00", "none"),
         ("median_annual_rent_aed_k", "double", "type number", "0.0", "none"),
     ],
@@ -128,6 +133,14 @@ MEASURES = [  # (name, DAX, format)
     ("Median Gross Yield", "MEDIAN ( fact_rent_yield[gross_yield_pct] ) / 100", "0.0%"),
     ("Best Gross Yield", "MAX ( fact_rent_yield[gross_yield_pct] ) / 100", "0.0%"),
     ("Areas Measured", "COUNTROWS ( fact_rent_yield )", "0"),
+    # Net of service charges (2026 DLD Service Charge Index rate of each area's most-leased building)
+    ("Net Yield %", "AVERAGE ( fact_rent_yield[net_yield_pct] ) / 100", "0.0%"),
+    # Gross only where net is known, so the gross-vs-net chart lists just the areas with a service charge
+    ("Gross Yield (net areas) %", "IF ( NOT ISBLANK ( [Net Yield %] ), [Gross Yield %] )", "0.0%"),
+    ("Service Charge (AED/sq ft)", "AVERAGE ( fact_rent_yield[service_charge_aed_sqft] )", "0.00"),
+    ("Median Net Yield", "MEDIAN ( fact_rent_yield[net_yield_pct] ) / 100", "0.0%"),
+    ("Best Net Yield", "MAX ( fact_rent_yield[net_yield_pct] ) / 100", "0.0%"),
+    ("Service Charge Share of Rent", "MEDIAN ( fact_rent_yield[service_charge_share_of_rent_pct] ) / 100", "0%"),
     ("Median Price (AED M)", "DIVIDE ( [Median Price (AED)], 1e6 )", "0.00"),
 ]
 
@@ -253,6 +266,9 @@ DISPLAY_NAMES = {
     "fact_price_index.raw_avg_price_sqft": "Simple avg AED/sq ft",
     "fact_price_index.raw_index": "Simple avg index",
     "_Measures.Years of Rent to Buy": "Years to pay back", "_Measures.Area Rank by Sales": "Rank",
+    "_Measures.Gross Yield %": "Gross yield", "_Measures.Net Yield %": "Net of service charges",
+    "_Measures.Gross Yield (net areas) %": "Gross yield",
+    "_Measures.Service Charge (AED/sq ft)": "Service charge (AED/sq ft)",
 }
 
 
@@ -488,26 +504,40 @@ def page_buyers():
     return "Buyers & projects", v
 
 
+def yield_rows() -> list[dict]:
+    """The exported area yields, so card labels can name the areas and counts they show."""
+    with open(MODEL_DIR / "fact_rent_yield.csv", encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
 def page_yield():
     ry = "fact_rent_yield"
-    v = header("Where do apartments pay back fastest?",
-               "Gross rental yield: 34,649 new leases (Sep 2026) vs ready-apartment prices in the same buildings")
-    for box, (m, label) in zip(columns(3, ROW1, 84), [("Median Gross Yield", "Median gross yield (35 areas)"),
-                                                      ("Best Gross Yield", "Highest yield (Dubai Investment Park 2)"),
-                                                      ("Areas Measured", "Areas with 3+ matched buildings")]):
+    rows = yield_rows()
+    net = [r for r in rows if r["net_yield_pct"]]
+    best_net = max(net, key=lambda r: float(r["net_yield_pct"]))["area"] if net else "n/a"
+    v = header("What investors actually earn",
+               "Sep 2026 leases vs ready-apartment prices, same buildings · net = after 2026 DLD service charges")
+    # Net (what an investor actually keeps) leads; gross stays alongside for comparison
+    for box, (m, label) in zip(columns(4, ROW1, 84), [("Median Net Yield", f"Median net of service charges ({len(net)} areas)"),
+                                                      ("Service Charge Share of Rent", "Rent taken by service charges (median)"),
+                                                      ("Best Net Yield", f"Highest net yield ({best_net})"),
+                                                      ("Median Gross Yield", f"Median gross yield ({len(rows)} areas)")]):
         v.append(card(*box, m, label))
     top = ROW1 + 84 + GAP
     h = PAGE_H - MARGIN - top
     bar_w = 540
-    v += [visual("clusteredBarChart", MARGIN, top, bar_w, h, {"Category": [field(ry, "area")], "Y": [field(M, "Gross Yield %", True)]},
-                 title="Gross rental yield by area", order=(field(M, "Gross Yield %", True), "desc"), objects=DATA_LABELS),
+    v += [visual("clusteredBarChart", MARGIN, top, bar_w, h,
+                 {"Category": [field(ry, "area")], "Y": [field(M, "Net Yield %", True), field(M, "Gross Yield (net areas) %", True)]},
+                 title=f"Net of service charges vs gross: the {len(net)} areas with a 2026 DLD rate",
+                 order=(field(M, "Net Yield %", True), "desc"), objects=DATA_LABELS),
           visual("tableEx", MARGIN + bar_w + GAP, top, PAGE_W - 2 * MARGIN - bar_w - GAP, h,
-                 {"Values": [field(ry, "area"), field(M, "Gross Yield %", True), field(M, "Years of Rent to Buy", True),
-                             field(ry, "median_price_aed_m"), field(ry, "median_annual_rent_aed_k"), field(ry, "buildings")]},
-                 title="Yield table", order=(field(M, "Gross Yield %", True), "desc"),
-                 objects=table_objects({"fact_rent_yield.area": 200, f"{M}.Gross Yield %": 75, f"{M}.Years of Rent to Buy": 85,
-                                        "fact_rent_yield.median_price_aed_m": 100, "fact_rent_yield.median_annual_rent_aed_k": 110,
-                                        "fact_rent_yield.buildings": 75}))]
+                 {"Values": [field(ry, "area"), field(M, "Net Yield %", True), field(M, "Gross Yield %", True),
+                             field(M, "Service Charge (AED/sq ft)", True), field(M, "Years of Rent to Buy", True),
+                             field(ry, "median_price_aed_m"), field(ry, "median_annual_rent_aed_k")]},
+                 title="Yield table", order=(field(M, "Net Yield %", True), "desc"),
+                 objects=table_objects({"fact_rent_yield.area": 165, f"{M}.Gross Yield %": 60, f"{M}.Net Yield %": 85,
+                                        f"{M}.Service Charge (AED/sq ft)": 85, f"{M}.Years of Rent to Buy": 70,
+                                        "fact_rent_yield.median_price_aed_m": 80, "fact_rent_yield.median_annual_rent_aed_k": 90}))]
     return "Rental yield", v
 
 

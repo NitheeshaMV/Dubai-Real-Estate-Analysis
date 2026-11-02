@@ -15,7 +15,7 @@ area_key,area,nearest_metro,nearest_mall,nearest_landmark
 14,Al Buteen,Al Ras Metro Station,Dubai Mall,Dubai International Airport
 15,Al Dhagaya,Palm Deira Metro Stations,Dubai Mall,Dubai International Airport
 16,Al Furjan,Ibn Battuta Metro Station,Ibn-e-Battuta Mall,Expo 2020 Site
-17,Al Garhoud,Terminal 3,City Centre Mirdif,Dubai International Airport
+17,Al Garhoud,GGICO Metro Station,City Centre Mirdif,Dubai International Airport
 18,Al Goze First,Business Bay Metro Station,Dubai Mall,Downtown Dubai
 19,Al Goze Fourth,,,
 20,Al Goze Industrial First,Noor Bank Metro Station,Mall of the Emirates,Burj Al Arab
@@ -146,7 +146,7 @@ area_key,area,nearest_metro,nearest_mall,nearest_landmark
 145,Jaddaf Waterfront,Al Jadaf Metro Station,Dubai Mall,Dubai International Airport
 146,Jumeira Bay,Business Bay Metro Station,Dubai Mall,Burj Khalifa
 147,Jumeirah Beach Residence,Jumeirah Beach Resdency,Marina Mall,Burj Al Arab
-148,Jumeirah First,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
+148,Jumeirah First,Buj Khalifa Dubai Mall Metro Station,Dubai Mall,Burj Khalifa
 149,Jumeirah Golf,Damac Properties,Ibn-e-Battuta Mall,Sports City Swimming Academy
 150,Jumeirah Heights,Jumeirah Lakes Towers,Marina Mall,Sports City Swimming Academy
 151,Jumeirah Islands,Jumeirah Lakes Towers,Marina Mall,Sports City Swimming Academy
@@ -197,7 +197,7 @@ area_key,area,nearest_metro,nearest_mall,nearest_landmark
 196,Palm Deira,Palm Deira Metro Stations,Dubai Mall,Dubai International Airport
 197,Palm Jabal Ali,,,
 198,Palm Jumeirah,Palm Jumeirah,Marina Mall,Burj Al Arab
-199,Palmarosa,,,Hamdan Sports Complex
+199,Palmarosa,,,Motor City
 200,Pearl Jumeira,Trade Centre Metro Station,Dubai Mall,Burj Khalifa
 201,Polo Townhouses Igo,Business Bay Metro Station,Dubai Mall,Downtown Dubai
 202,Port Saeed,Deira City Centre,Dubai Mall,Dubai International Airport

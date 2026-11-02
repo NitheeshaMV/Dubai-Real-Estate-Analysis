@@ -48,7 +48,8 @@ def main() -> None:
         has_yield = con.execute(
             "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'mart_rental_yield'").fetchone()[0]
         rental_yield = [list(r) for r in con.execute("""
-            SELECT area, ready_sales, leases, median_price_aed, median_annual_rent_aed, gross_yield_pct, years_of_rent_to_buy, buildings
+            SELECT area, ready_sales, leases, median_price_aed, median_annual_rent_aed, gross_yield_pct, years_of_rent_to_buy, buildings,
+                   net_yield_pct, service_charge_aed_sqft, service_charge_share_of_rent_pct
             FROM mart_rental_yield ORDER BY gross_yield_pct DESC""").fetchall()] if has_yield else []
         rent_period = con.execute("""
             SELECT strftime(MIN(registration_date), '%d %b') || ' – ' || strftime(MAX(registration_date), '%d %b %Y')
